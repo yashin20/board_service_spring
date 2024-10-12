@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+
+<h2>로그인</h2>
+
+<form th:action="@{/login}" th:object="${loginForm}" method="post">
+
+    <div>
+        <input type="text" id="floatingInput" placeholder="username"
+               name="username" th:field="*{username}" required="">
+        <label for="floatingInput">Username</label>
+    </div>
+
+    <div>
+        <input type="password" id="floatingPassword" placeholder="Password" autocomplete="off"
+               name="password" th:field="*{password}" required="">
+        <label for="floatingPassword">Password</label>
+    </div>
+
+    <button type="submit">Login</button>
+
+    <!-- Error message -->
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}">Error message here</p>
+    </div>
+
+</form>
+
+
+</body>
+</html>
