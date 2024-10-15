@@ -6,5 +6,49 @@
 </head>
 <body>
 
+<h2>회원가입</h2>
+
+<form th:action="@{/members/join}" th:object="${joinForm}" method="post">
+
+    <div>
+        <input id="join-username" th:field="*{username}" type="text" placeholder="username" required="">
+        <label for="join-username">Username</label>
+    </div>
+
+    <div>
+        <input id="join-newPassword" th:field="*{newPassword}" type="password" placeholder="password" required="">
+        <label for="join-newPassword">Password</label>
+    </div>
+
+    <div>
+        <input id="join-newPassword2" th:field="*{newPassword2}" type="password" placeholder="password check" required="">
+        <label for="join-newPassword2">Password Check</label>
+    </div>
+
+    <div>
+        <input id="join-nickname" th:field="*{nickname}" type="text" placeholder="nickname" required="">
+        <label for="join-nickname">Nickname</label>
+    </div>
+
+    <div>
+        <input id="join-email" th:field="*{email}" type="email" placeholder="E-Mail" required="">
+        <label for="join-email">E-Mail</label>
+    </div>
+
+    <div>
+        <input id="join-phone" th:field="*{phone}" type="text" placeholder="Phone" required="">
+        <label for="join-phone">Phone</label>
+    </div>
+
+    <button type="submit">Submit</button>
+
+    <!-- Error message -->
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}">Error message here</p>
+    </div>
+
+</form>
+
+
 </body>
 </html>
