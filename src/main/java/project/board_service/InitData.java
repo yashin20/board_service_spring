@@ -39,10 +39,13 @@ public class InitData {
         public void init() {
 
             String username = "member1";
-            String password = "1234";
+            String password = "1q2w3e4r~!";
             MemberDto.Request dto = new MemberDto.Request();
             dto.setUsername(username);
             dto.setPassword(passwordEncoder.encode(password));
+            dto.setNickname("nickname1");
+            dto.setEmail("member1@gmail.com");
+            dto.setPhone("010-1234-5678");
             dto.setRole(MemberRole.USER);
             em.persist(dto.toEntity());
         }

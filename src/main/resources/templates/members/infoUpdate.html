@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Member Information Page</title>
+</head>
+<body>
+
+<h2>회원 정보 수정 페이지</h2>
+
+<form th:action="@{/members/info/update}" th:object="${updateForm}" method="post">
+
+    <!--'id' Update 를 위함. 히든 처리-->
+    <div>
+        <input id="infoUpdate-id" th:field="*{id}" type="text" required="" readonly hidden="hidden">
+    </div>
+
+    <!--'username' 수정 불가-->
+    <div>
+        <input id="infoUpdate-username" th:field="*{username}" type="text" required="" readonly>
+        <label for="infoUpdate-username">Username</label>
+    </div>
+
+    <!--'nickname' 수정 가능-->
+    <div>
+        <input id="infoUpdate-nickname" th:field="*{nickname}" type="text" required="">
+        <label for="infoUpdate-nickname">Nickname</label>
+
+        <!-- Error message -->
+        <div th:if="${nicknameError}">
+            <p th:text="${nicknameError}">Error message here</p>
+        </div>
+    </div>
+
+    <!--'email' 수정 가능-->
+    <div>
+        <input id="infoUpdate-email" th:field="*{email}" type="text" required="">
+        <label for="infoUpdate-email">E-Mail</label>
+
+        <!-- Error message -->
+        <div th:if="${emailError}">
+            <p th:text="${emailError}">Error message here</p>
+        </div>
+    </div>
+
+    <!--'phone' 수정 가능-->
+    <div>
+        <input id="infoUpdate-phone" th:field="*{phone}" type="text" required="">
+        <label for="infoUpdate-phone">Phone</label>
+
+        <!-- Error message -->
+        <div th:if="${phoneError}">
+            <p th:text="${phoneError}">Error message here</p>
+        </div>
+    </div>
+
+    <button type="submit">Submit</button>
+
+    <!-- Error message -->
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}">Error message here</p>
+    </div>
+
+</form>
+
+</body>
+</html>

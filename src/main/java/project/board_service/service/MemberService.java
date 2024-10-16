@@ -75,7 +75,7 @@ public class MemberService {
     /** Read Member **/
     public Member findMemberById(Long memberId) {
         return memberRepository.findById(memberId)
-                .orElseThrow(() -> new DataNotFoundException("존재하지 않는 회원 입니다."));
+                .orElseThrow(() -> new DataNotFoundException("MemberService.findMemberById - 존재하지 않는 회원 입니다."));
     }
 
     public Member findMemberByUsername(String username) {
@@ -116,7 +116,7 @@ public class MemberService {
     /*로그인 인증 로직*/
     private boolean authenticate(String username, String password) {
         Member member = memberRepository.findByUsername(username)
-                .orElseThrow(() -> new DataNotFoundException("존재하지 않는 회원입니다."));
+                .orElseThrow(() -> new DataNotFoundException("MemberService.authenticate - 존재하지 않는 회원입니다."));
 
         return passwordEncoder.matches(password, member.getPassword());
     }
@@ -134,7 +134,7 @@ public class MemberService {
     public Member getCurrentMember() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return memberRepository.findByUsername(authentication.getName())
-                .orElseThrow(() -> new DataNotFoundException("존재하지 않는 회원 입니다."));
+                .orElseThrow(() -> new DataNotFoundException("MemberService.getCurrentMember - 존재하지 않는 회원 입니다."));
     }
     
 }
