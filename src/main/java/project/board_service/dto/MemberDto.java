@@ -68,7 +68,6 @@ public class MemberDto {
     public static class Response {
         private Long id;
         private String username;
-        private String password;
         private String nickname;
         private String email;
         private String phone;
@@ -78,7 +77,6 @@ public class MemberDto {
         public Response(Member member) {
             this.id = member.getId();
             this.username = member.getUsername();
-            this.password = member.getPassword();
             this.nickname = member.getNickname();
             this.email = member.getEmail();
             this.phone = member.getPhone();

@@ -131,7 +131,7 @@ public class MemberService {
     }
 
     /*현재 로그인된 회원 가져오기*/
-    private Member getCurrentMember() {
+    public Member getCurrentMember() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return memberRepository.findByUsername(authentication.getName())
                 .orElseThrow(() -> new DataNotFoundException("존재하지 않는 회원 입니다."));

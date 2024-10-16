@@ -13,31 +13,61 @@
     <div>
         <input id="join-username" th:field="*{username}" type="text" placeholder="username" required="">
         <label for="join-username">Username</label>
+
+        <!-- Error message -->
+        <div th:if="${usernameError}">
+            <p th:text="${usernameError}">Error message here</p>
+        </div>
     </div>
 
     <div>
         <input id="join-newPassword" th:field="*{newPassword}" type="password" placeholder="password" required="">
         <label for="join-newPassword">Password</label>
+
+        <!-- Error message -->
+        <div th:if="${newPasswordError}">
+            <p th:text="${newPasswordError}">Error message here</p>
+        </div>
     </div>
 
     <div>
         <input id="join-newPassword2" th:field="*{newPassword2}" type="password" placeholder="password check" required="">
         <label for="join-newPassword2">Password Check</label>
+
+        <!-- Error message -->
+        <div th:if="${newPassword2Error}">
+            <p th:text="${newPassword2Error}">Error message here</p>
+        </div>
     </div>
 
     <div>
         <input id="join-nickname" th:field="*{nickname}" type="text" placeholder="nickname" required="">
         <label for="join-nickname">Nickname</label>
+
+        <!-- Error message -->
+        <div th:if="${nicknameError}">
+            <p th:text="${nicknameError}">Error message here</p>
+        </div>
     </div>
 
     <div>
         <input id="join-email" th:field="*{email}" type="email" placeholder="E-Mail" required="">
         <label for="join-email">E-Mail</label>
+
+        <!-- Error message -->
+        <div th:if="${emailError}">
+            <p th:text="${emailError}">Error message here</p>
+        </div>
     </div>
 
     <div>
         <input id="join-phone" th:field="*{phone}" type="text" placeholder="Phone" required="">
         <label for="join-phone">Phone</label>
+
+        <!-- Error message -->
+        <div th:if="${phoneError}">
+            <p th:text="${phoneError}">Error message here</p>
+        </div>
     </div>
 
     <button type="submit">Submit</button>

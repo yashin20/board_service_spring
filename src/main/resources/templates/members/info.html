@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Information Page</title>
+</head>
+<body>
+
+<div>
+    <input id="info-id" th:field="*{currentMember.id}" type="text" required="" readonly>
+    <label for="info-id">ID</label>
+</div>
+
+<div>
+    <input id="info-username" th:field="*{currentMember.username}" type="text" required="" readonly>
+    <label for="info-username">Username</label>
+</div>
+
+<div>
+    <input id="info-nickname" th:field="*{currentMember.nickname}" type="text" required="" readonly>
+    <label for="info-nickname">Nickname</label>
+</div>
+
+<div>
+    <input id="info-email" th:field="*{currentMember.email}" type="text" required="" readonly>
+    <label for="info-email">E-Mail</label>
+</div>
+
+<div>
+    <input id="info-phone" th:field="*{currentMember.phone}" type="text" required="" readonly>
+    <label for="info-phone">Phone</label>
+</div>
+
+<!--<div>
+    <input id="info-role" th:field="*{currentMember.role.name()}" type="text" required="" readonly>
+    <label for="info-role">Role</label>
+</div>-->
+
+</body>
+</html>
