@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Information Page</title>
+</head>
+<body>
+
+<h2> 게시글 상세 정보 페이지 </h2>
+
+<div>
+    <input id="info-id" th:field="*{post.id}" type="text" required="" readonly>
+    <label for="info-id">ID</label>
+</div>
+
+<div>
+    <input id="info-title" th:field="*{post.title}" type="text" required="" readonly>
+    <label for="info-title">Title</label>
+</div>
+
+<div>
+    <input id="info-content" th:field="*{post.content}" type="text" required="" readonly>
+    <label for="info-content">Content</label>
+</div>
+
+<div>
+    <input id="info-memberId" th:field="*{post.memberId}" type="text" required="" readonly>
+    <label for="info-memberId">Member ID</label>
+</div>
+
+<a th:href="@{'/posts/' + ${post.id} + '/update'}" role="button">게시글 수정</a>
+<a th:href="@{'/posts/' + ${post.id} + '/delete'}" role="button">게시글 삭제</a>
+
+</body>
+</html>

@@ -9,8 +9,13 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import project.board_service.dto.CommentDto;
 import project.board_service.dto.MemberDto;
+import project.board_service.dto.PostDto;
+import project.board_service.entity.Comment;
+import project.board_service.entity.Member;
 import project.board_service.entity.MemberRole;
+import project.board_service.entity.Post;
 
 // Test Data 생성
 @Profile("local")
@@ -38,16 +43,53 @@ public class InitData {
         @Transactional
         public void init() {
 
-            String username = "member1";
-            String password = "1q2w3e4r~!";
+            /*member1 생성*/
+            Member member1 = createMember("member1", "1q2w3e4r~!");
+
+            /*게시글 생성*/
+            Post post1 = createPost("comment test post", "content-comment", member1);
+            for (int i = 1; i <= 10; i++) {
+                createPost("title" + i , "content" + i, member1);
+            }
+
+            /*댓글 생성*/
+            for (int i = 1; i <= 10; i++) {
+                createComment("comment" + i, post1, member1);
+            }
+
+        }
+
+        public Member createMember(String username, String password) {
             MemberDto.Request dto = new MemberDto.Request();
             dto.setUsername(username);
             dto.setPassword(passwordEncoder.encode(password));
-            dto.setNickname("nickname1");
-            dto.setEmail("member1@gmail.com");
+            dto.setNickname("nic_" + username);
+            dto.setEmail(username + "@gmail.com");
             dto.setPhone("010-1234-5678");
             dto.setRole(MemberRole.USER);
-            em.persist(dto.toEntity());
+            Member member = dto.toEntity();
+            em.persist(member);
+            return member;
+        }
+
+        public Post createPost(String title, String content, Member member) {
+            PostDto.Request dto = new PostDto.Request();
+            dto.setTitle(title);
+            dto.setContent(content);
+            dto.setMember(member);
+            Post post = dto.toEntity();
+            em.persist(post);
+            return post;
+        }
+
+        public Comment createComment(String content, Post post, Member member) {
+            CommentDto.Request dto = new CommentDto.Request();
+            dto.setContent(content);
+            dto.setPost(post);
+            dto.setMember(member);
+            Comment comment = dto.toEntity();
+            em.persist(comment);
+            return comment;
         }
     }
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Post Create Page</title>
+</head>
+<body>
+
+<h2> 게시글 생성 페이지 </h2>
+
+<form th:action="@{/posts/new}" th:object="${createPostForm}" method="post">
+
+  <div>
+    <input id="create-title" th:field="*{title}" type="text" placeholder="title" required="">
+    <label for="create-title">Title</label>
+
+    <!-- Error message -->
+    <div th:if="${titleError}">
+      <p th:text="${titleError}">Error message here</p>
+    </div>
+  </div>
+
+  <div>
+    <textarea id="create-content" th:field="*{content}" rows="5" placeholder="content" required=""></textarea>
+    <label for="create-content">Content</label>
+
+    <!-- Error message -->
+    <div th:if="${contentError}">
+      <p th:text="${contentError}">Error message here</p>
+    </div>
+  </div>
+
+  <button type="submit">Submit</button>
+
+  <!-- Error message -->
+  <div th:if="${errorMessage}">
+    <p th:text="${errorMessage}">Error message here</p>
+  </div>
+
+</form>
+
+</body>
+</html>

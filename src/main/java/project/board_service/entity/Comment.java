@@ -3,6 +3,7 @@ package project.board_service.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import project.board_service.dto.CommentDto;
 
 @Entity
 @Getter
@@ -24,4 +25,17 @@ public class Comment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member; //작성자
+
+    public Comment(Long id, String content, Post post, Member member) {
+        this.id = id;
+        this.content = content;
+        this.post = post;
+        this.member = member;
+    }
+
+    public void update(CommentDto.Request dto) {
+        if (dto.getContent() != null) {
+            this.content = dto.getContent();
+        }
+    }
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+
+<h2>메인 화면</h2>
+
+<h2>게시글 목록</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Num</th>
+        <th>Title</th>
+        <th>Member</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+        <th>Views</th>
+        <th>Likes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${postList}">
+        <td th:text="${post.id}">post - id</td>
+        <td th:text="${post.title}">post - title</td>
+        <td th:text="${post.member.getUsername()}">post - member</td>
+        <td th:text="${post.createdAt}">post - createdAt</td>
+        <td th:text="${post.updatedAt}">post - updatedAt</td>
+        <td th:text="${post.views}">post - views</td>
+        <td th:text="${post.likes}">post - likes</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
