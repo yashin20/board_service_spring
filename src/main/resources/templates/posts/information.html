@@ -1,8 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Post Information Page</title>
+    <style>
+        /* 모달 기본 스타일 */
+        #commentModal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            position: relative;
+            margin: 15% auto;
+            padding: 20px;
+            width: 50%;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 </head>
 <body>
 
@@ -28,8 +49,182 @@
     <label for="info-memberId">Member ID</label>
 </div>
 
-<a th:href="@{'/posts/' + ${post.id} + '/update'}" role="button">게시글 수정</a>
-<a th:href="@{'/posts/' + ${post.id} + '/delete'}" role="button">게시글 삭제</a>
+<a th:href="@{'/posts/update' + ${post.id}}" role="button">게시글 수정</a>
+<a th:href="@{'/posts/delete' + ${post.id}}" role="button">게시글 삭제</a>
+
+<!--댓글 기능-->
+<span>댓글 <a th:text="${comments.size()}"></a> 개</span>
+<a href="#" onclick="openModal()">댓글쓰기</a>
+
+<!-- 댓글 작성 모달 -->
+<div id="commentModal">
+    <div class="modal-content">
+        <form th:action="@{/comments/create}" th:object="${commentRequestDto}" method="post">
+            <div>
+                <span>댓글쓰기</span>
+                <span id="charCount">0/300</span>
+            </div>
+
+            <input type="hidden" th:field="*{postId}" />
+            <div>
+                <textarea th:field="*{content}" oninput="updateCharCount(this)"></textarea>
+            </div>
+
+            <button type="button" onclick="closeModal()">취소</button>
+            <button type="submit">확인</button>
+        </form>
+    </div>
+</div>
+
+<!--댓글 리스트-->
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Content</th>
+        <th>Writer</th>
+        <th>Created At</th>
+        <th>Likes</th>
+        <th>is updated</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="comment : ${comments}">
+        <td th:text="${comment.id}">comment - id</td>
+        <td>
+            <span th:text="${comment.content}" th:id="'content-' + ${comment.id}">comment - content</span>
+
+            <!--댓글 수정을 위한 <textarea> / <button>-->
+            <textarea th:id="'textarea-' + ${comment.id}" style="display:none;" required></textarea>
+            <button th:id="'submit-' + ${comment.id}"
+                    style="display:none;" type="button"
+                    th:data-id="${comment.id}"
+                    onclick="submitComment(this.getAttribute('data-id'))">게시
+            </button>
+        </td>
+        <td th:text="${comment.nickname}">comment - member - nickname</td>
+        <td th:text="${comment.createdAt}">comment - createdAt</td>
+        <td th:text="${comment.likes}">comment - likes</td>
+        <td>
+            <span th:if="${comment.isUpdated}">수정됨</span>
+        </td>
+        <td>
+            <!--수정 버튼-->
+            <button th:id="'update-' + ${comment.id}"
+                    th:data-id="${comment.id}"
+                    onclick="updateComment(this.getAttribute('data-id'))">수정
+            </button>
+        </td>
+        <td>
+            <!--삭제 버튼-->
+            <form th:action="@{/comments/delete/{commentId}(commentId=${comment.id})}" method="post">
+                <!-- 게시글 ID를 함께 전송 -->
+                <input type="hidden" name="postId" th:value="${post.id}">
+                <button type="submit">삭제</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<span>댓글 <a th:text="${comments.size()}"></a> 개</span>
+
+<!--댓글 작성 폼-->
+<form th:action="@{/comments/create}" th:object="${commentRequestDto}" method="post">
+    <div>
+        <span>댓글쓰기</span>
+        <span id="charCount-form">0/300</span>
+    </div>
+
+    <input type="hidden" th:field="*{postId}" />
+    <div>
+        <textarea th:field="*{content}" oninput="updateCharCount(this)"></textarea>
+    </div>
+
+    <button type="submit">등록</button>
+</form>
+
+
+<script>
+    // 모달 열기
+    function openModal() {
+        document.getElementById('commentModal').style.display = 'block';
+    }
+
+    // 모달 닫기
+    function closeModal() {
+        document.getElementById('commentModal').style.display = 'none';
+    }
+
+    // 문자 수 업데이트
+    function updateCharCount(textarea) {
+        const charCount = textarea.value.length;
+        document.getElementById('charCount').innerText = `${charCount}/300`;
+        document.getElementById('charCount-form').innerText = `${charCount}/300`;
+    }
+
+
+    /* 댓글 수정 모드 활성화 */
+    function updateComment(commentId) {
+        const contentSpan = document.getElementById(`content-${commentId}`);
+        const textarea = document.getElementById(`textarea-${commentId}`);
+        const submitButton = document.getElementById(`submit-${commentId}`);
+        const updateButton = document.getElementById(`update-${commentId}`);
+
+        textarea.value = contentSpan.innerText; //textarea <- 기존 content 넣기
+        contentSpan.style.display = 'none'; //댓글 내용 숨김
+        textarea.style.display = 'block'; //textarea 보이기
+        submitButton.style.display = 'block'; //submitButton 보이기
+        updateButton.style.display = 'none'; //updateButton 숨김
+    }
+
+
+    /* 댓글 수정 기능 수행 */
+    function submitComment(commentId) {
+        console.log("submitComment called with ID:", commentId);  // 로그 추가
+        const textarea = document.getElementById(`textarea-${commentId}`);
+        const newText = textarea.value; //수정된 내용 가져오기
+
+        //요청 페이로드 준비
+        const data = JSON.stringify({
+            id: commentId,
+            content: newText
+        });
+
+        fetch('/api/comments/' + commentId, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: data
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to update comment');
+                }
+                if (response.headers.get('Content-Type').includes('application/json')) {
+                    return response.json();
+                } else {
+                    throw new Error('Invalid response type');
+                }
+            })
+            .then(data => {
+                alert('댓글이 수정되었습니다: ' + data.message);
+                const contentSpan = document.getElementById(`content-${commentId}`);
+                contentSpan.innerText = newText;
+                contentSpan.style.display = 'block';
+                textarea.style.display = 'none';
+                document.getElementById(`submit-${commentId}`).style.display = 'none'; // '게시' 버튼 숨기기
+                document.getElementById(`update-${commentId}`).style.display = 'block'; // '수정' 버튼 보이기
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('댓글 수정 중 오류 발생: ' + error.message);
+            });
+    }
+</script>
 
 </body>
 </html>

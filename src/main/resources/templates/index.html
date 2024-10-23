@@ -13,22 +13,28 @@
 <table>
     <thead>
     <tr>
-        <th>Num</th>
+        <th>#</th>
         <th>Title</th>
-        <th>Member</th>
-        <th>Created At</th>
-        <th>Updated At</th>
-        <th>Views</th>
-        <th>Likes</th>
+        <th>Writer</th>
+        <th>
+            <a th:href="@{/(keyword=${keyword}, sort='createdAt', page=${currentPage - 1})}">Created At</a>
+        </th>
+        <th>
+            <a th:href="@{/(keyword=${keyword}, sort='views', page=${currentPage - 1})}">Views</a>
+        </th>
+        <th>
+            <a th:href="@{/(keyword=${keyword}, sort='likes', page=${currentPage - 1})}">Likes</a>
+        </th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="post : ${postList}">
+    <tr th:each="post : ${posts}">
         <td th:text="${post.id}">post - id</td>
-        <td th:text="${post.title}">post - title</td>
-        <td th:text="${post.member.getUsername()}">post - member</td>
+        <td>
+            <a th:text="${post.title}" th:href="@{|/posts/${post.id}|}">post - title</a>
+        </td>
+        <td th:text="${post.nickname}">post - member - nickname</td>
         <td th:text="${post.createdAt}">post - createdAt</td>
-        <td th:text="${post.updatedAt}">post - updatedAt</td>
         <td th:text="${post.views}">post - views</td>
         <td th:text="${post.likes}">post - likes</td>
     </tr>

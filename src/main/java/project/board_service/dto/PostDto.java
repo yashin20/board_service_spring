@@ -47,7 +47,11 @@ public class PostDto {
         private Integer views;
         private Integer likes;
         //member - 작성자
+        private String nickname;
         private Long memberId;
+
+        private String createdAt;
+        private String updatedAt;
 
         //Entity -> Dto
         public Response(Post post) {
@@ -56,7 +60,10 @@ public class PostDto {
             this.content = post.getContent();
             this.views = post.getViews();
             this.likes = post.getLikes();
+            this.nickname = post.getMember().getNickname();
             this.memberId = post.getMember().getId();
+            this.createdAt = post.getCreatedAt();
+            this.updatedAt = post.getUpdatedAt();
         }
     }
 }

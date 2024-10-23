@@ -16,7 +16,7 @@ public class Comment extends BaseEntity {
 
     private String content;
 
-    private Integer likes;
+    private Integer likes = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
@@ -36,6 +36,18 @@ public class Comment extends BaseEntity {
     public void update(CommentDto.Request dto) {
         if (dto.getContent() != null) {
             this.content = dto.getContent();
+        }
+    }
+
+    //likes increment
+    public void incrementLikes() {
+        this.likes += 1;
+    }
+
+    //likes decrement
+    public void decrementLikes() {
+        if (this.likes > 0) {
+            this.likes -= 1;
         }
     }
 }

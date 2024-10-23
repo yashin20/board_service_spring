@@ -22,7 +22,10 @@ public class CommentDto {
         private String content;
 
         private Post post;
+        private Long postId;
+
         private Member member;
+        private Long memberId;
 
         //Dto -> Entity
         public Comment toEntity() {
@@ -41,7 +44,15 @@ public class CommentDto {
         private String content;
         private Integer likes;
         private Long postId;
+        //작성자 - member
         private Long memberId;
+        private String nickname;
+
+        private String createdAt;
+        private String updatedAt;
+
+        //댓글 수정 여부 확인
+        private Boolean isUpdated;
 
         //Entity -> Dto
         public Response(Comment comment) {
@@ -49,7 +60,16 @@ public class CommentDto {
             this.content = comment.getContent();
             this.likes = comment.getLikes();
             this.postId = comment.getPost().getId();
+
             this.memberId = comment.getMember().getId();
+            this.nickname = comment.getMember().getNickname();
+
+            this.createdAt = comment.getCreatedAt();
+            this.updatedAt = comment.getUpdatedAt();
+
+            if (!comment.getCreatedAt().equals(comment.getUpdatedAt())) {
+                isUpdated = true;
+            }
         }
     }
 }

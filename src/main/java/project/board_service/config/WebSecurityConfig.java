@@ -36,6 +36,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
                                 .requestMatchers("/", "/members/login", "/members/join").permitAll()
+                                .requestMatchers("/posts/{postId}").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin((form) ->

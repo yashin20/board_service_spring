@@ -1,6 +1,8 @@
 package project.board_service.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -39,9 +41,19 @@ public class PostService {
         return postRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("PostService.findPostById - 존재하지 않는 게시글 입니다."));
     }
-    /*post 전체 조회*/
-    public List<Post> findAllPosts() {
-        return postRepository.findAll();
+
+    /** Paging Post List **/
+    /*1. 게시글 전체 조회*/
+    public Page<Post> findAllPosts(Pageable pageable) {
+        return postRepository.findAll(pageable);
+    }
+    /*2. 특정 회원 작성 게시글 조회*/
+    public Page<Post> findAllPostsByMember(Member member, Pageable pageable) {
+        return postRepository.findByMember(member, pageable);
+    }
+    /*3. Title - keyword 검색 게시글 조회 */
+    public Page<Post> searchPosts(String keyword, Pageable pageable) {
+        return postRepository.findByTitleContaining(keyword, pageable);
     }
 
     /** Update Post **/
