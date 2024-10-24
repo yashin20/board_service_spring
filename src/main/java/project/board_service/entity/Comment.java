@@ -18,6 +18,9 @@ public class Comment extends BaseEntity {
 
     private Integer likes = 0;
 
+    //content 수정 여부 추적 필드
+    private boolean isContentUpdated = false;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post; //소속 게시글
@@ -34,8 +37,9 @@ public class Comment extends BaseEntity {
     }
 
     public void update(CommentDto.Request dto) {
-        if (dto.getContent() != null) {
+        if (dto.getContent() != null && !dto.getContent().equals(this.content)) {
             this.content = dto.getContent();
+            this.isContentUpdated = true; //content 변경 여부 추적
         }
     }
 

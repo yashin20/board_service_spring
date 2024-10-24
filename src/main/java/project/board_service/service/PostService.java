@@ -41,6 +41,13 @@ public class PostService {
         return postRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("PostService.findPostById - 존재하지 않는 게시글 입니다."));
     }
+    /**게시글 정보 조회만을 위한 메서드 (조회수 증가)**/
+    @Transactional
+    public Post findPostOnlyView(Long id) {
+        Post post = findPostById(id);
+        post.incrementView();
+        return post;
+    }
 
     /** Paging Post List **/
     /*1. 게시글 전체 조회*/

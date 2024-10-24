@@ -17,9 +17,7 @@ import project.board_service.entity.Comment;
 import project.board_service.entity.Post;
 import project.board_service.exception.DataAlreadyExistsException;
 import project.board_service.exception.PasswordCheckFailedException;
-import project.board_service.service.CommentService;
-import project.board_service.service.MemberService;
-import project.board_service.service.PostService;
+import project.board_service.service.*;
 
 import java.util.List;
 
@@ -31,6 +29,8 @@ public class PostController {
     private final PostService postService;
     private final MemberService memberService;
     private final CommentService commentService;
+    private final CommentLikesService commentLikesService;
+    private final PostLikesService postLikesService;
 
     /** 게시글 생성 (create post) - "/posts/new" */
     @GetMapping("/new")
@@ -76,12 +76,24 @@ public class PostController {
     @GetMapping("/{postId}")
     public String postInformation(@PathVariable Long postId, Model model) {
         //1. 게시글 정보 (post information)
-        Post post = postService.findPostById(postId);
-        model.addAttribute("post", new PostDto.Response(post));
+        Post post = postService.findPostOnlyView(postId);
+        PostDto.Response postDto = new PostDto.Response(post);
+        //현재 로그인된 경우 -> 좋아요 여부 표시
+        if(memberService.isLoggedIn()) {
+            postDto.setIsLiked(postLikesService.isLikedByMember(memberService.getCurrentMember().getId(), postId));
+        }
+        model.addAttribute("post", postDto);
 
         //2. 댓글 리스트 - 게시글 소속 (post's comment list)
         List<Comment> comments = commentService.findCommentsByPost(post);
-        List<CommentDto.Response> list = comments.stream().map(CommentDto.Response::new).toList();
+        List<CommentDto.Response> list = comments.stream().map(comment -> {
+            CommentDto.Response commentDto = new CommentDto.Response(comment);
+            //현재 로그인된 경우 -> 좋아요 여부 표시
+            if(memberService.isLoggedIn()) {
+                commentDto.setIsLiked(commentLikesService.isLikedByMember(memberService.getCurrentMember().getId(), comment.getId()));
+            }
+            return commentDto;
+        }).toList();
         model.addAttribute("comments", list); //comment dto list
 
         //3. 댓글 작성 폼

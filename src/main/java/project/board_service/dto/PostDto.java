@@ -53,6 +53,9 @@ public class PostDto {
         private String createdAt;
         private String updatedAt;
 
+        //좋아요 여부 확인
+        private Boolean isLiked;
+
         //Entity -> Dto
         public Response(Post post) {
             this.id = post.getId();

@@ -52,7 +52,9 @@ public class CommentDto {
         private String updatedAt;
 
         //댓글 수정 여부 확인
-        private Boolean isUpdated;
+        private Boolean isContentUpdated;
+        //좋아요 여부 확인
+        private Boolean isLiked;
 
         //Entity -> Dto
         public Response(Comment comment) {
@@ -67,9 +69,7 @@ public class CommentDto {
             this.createdAt = comment.getCreatedAt();
             this.updatedAt = comment.getUpdatedAt();
 
-            if (!comment.getCreatedAt().equals(comment.getUpdatedAt())) {
-                isUpdated = true;
-            }
+            this.isContentUpdated = comment.isContentUpdated();
         }
     }
 }

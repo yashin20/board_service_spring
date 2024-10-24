@@ -12,6 +12,7 @@ import project.board_service.entity.MemberRole;
 import project.board_service.exception.DataAlreadyExistsException;
 import project.board_service.exception.DataNotFoundException;
 import project.board_service.exception.PasswordCheckFailedException;
+import project.board_service.exception.UnauthorizedAccessException;
 import project.board_service.repository.MemberRepository;
 
 @Service
@@ -135,6 +136,13 @@ public class MemberService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return memberRepository.findByUsername(authentication.getName())
                 .orElseThrow(() -> new DataNotFoundException("MemberService.getCurrentMember - 존재하지 않는 회원 입니다."));
+    }
+
+    /*현재 로그인된 상태임을 검증*/
+    public Boolean isLoggedIn() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null && authentication.isAuthenticated() &&
+                !authentication.getPrincipal().equals("anonymousUser");
     }
     
 }
