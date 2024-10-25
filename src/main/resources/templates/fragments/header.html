@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+
+<!--로고, 검색 폼, {로그인, 회원가입 버튼}, {현재 로그인된 회원, 로그아웃 버튼}-->
+<header th:fragment="header">
+
+    <!-- 로고 -->
+    <a th:href="@{/}">Board Service</a>
+
+    <!--비로그인 상태 버튼-->
+    <div sec:authorize="isAnonymous()">
+        <a class="btn btn-outline-success" href="/members/login" role="button">로그인</a>
+        <a class="btn btn-outline-info" href="/members/join" role="button">회원가입</a>
+    </div>
+
+    <!--로그인 상태 버튼-->
+    <div sec:authorize="isAuthenticated()">
+        <!--현재 로그인 회원 정보 버튼-->
+        <a class="btn btn-outline-info"
+           th:text="${#authentication.name} + '님 환영합니다!'"
+           th:href="@{/members/info}">username</a>
+
+        <!--Logout Post 요청 Form-->
+        <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none"></form>
+        <a class="btn btn-outline-danger" role="button" onclick="document.getElementById('logoutForm').submit(); return false;">로그아웃</a>
+    </div>
+
+    <!--검색 폼-->
+    <form class="d-flex" th:action="@{/}" method="get" role="search">
+        <input type="search" placeholder="Search" name="keyword">
+        <button type="submit">Search</button>
+    </form>
+
+</header>
+
+</body>
+</html>
+
+
+
+

@@ -43,16 +43,19 @@ public class InitData {
         @Transactional
         public void init() {
 
-            /*member1 생성*/
+            /*Member 10개 생성*/
             Member member1 = createMember("member1", "1q2w3e4r~!");
             Member member2 = createMember("member2", "1q2w3e4r~!");
             Member member3 = createMember("member3", "1q2w3e4r~!");
+            for (int i = 4; i <= 10; i++) {
+                createMember("member" + i, "1q2w3e4r~!");
+            }
 
             /*게시글 생성*/
-            for (int i = 1; i <= 17; i++) {
+            for (int i = 1; i <= 51; i++) {
                 createPost("title" + i , "content" + i, member1);
-                createPost("title" + i + i , "content" + i + i, member2);
-                createPost("게시글 입니다." + i , "게시글 내용입니다." + i, member3);
+                createPost("Post Title" + i , "content" + i + i, member2);
+                createPost(i + "게시글 입니다.", "게시글 내용입니다." + i, member3);
             }
             Post post1 = createPost("comment test post", "content-comment", member1);
 
