@@ -29,61 +29,69 @@
     <link href="/css/styles.css" rel="stylesheet"/>
 </head>
 <body>
+<!--header-->
+<header class="header" th:replace="~{fragments/header :: header}"></header>
 
-<h2> 게시글 상세 정보 페이지 </h2>
+<div class="container mt-5">
+    <h2 class="mb-4">게시글 상세 정보</h2>
 
-<div>
-    <input id="info-id" th:field="*{post.id}" type="text" required="" readonly>
-    <label for="info-id">ID</label>
-</div>
+    <div class="mb-3">
+        <label for="info-id" class="form-label">ID</label>
+        <input id="info-id" th:field="*{post.id}" type="text" class="form-control" required="" readonly>
+    </div>
 
-<div>
-    <input id="info-title" th:field="*{post.title}" type="text" required="" readonly>
-    <label for="info-title">Title</label>
-</div>
+    <div class="mb-3">
+        <label for="info-title" class="form-label">Title</label>
+        <input id="info-title" th:field="*{post.title}" type="text" class="form-control" required="" readonly>
+    </div>
 
-<div>
-    <textarea id="info-content" th:field="*{post.content}" type="text" required="" readonly></textarea>
-    <label for="info-content">Content</label>
-</div>
+    <div class="mb-3">
+        <label for="info-content" class="form-label">Content</label>
+        <textarea id="info-content" th:field="*{post.content}" class="form-control" required="" readonly></textarea>
+    </div>
 
-<div>
-    <input id="info-memberId" th:field="*{post.memberId}" type="text" required="" readonly>
-    <label for="info-memberId">Member ID</label>
-</div>
+    <div class="mb-3">
+        <label for="info-memberId" class="form-label">Member ID</label>
+        <input id="info-memberId" th:field="*{post.memberId}" type="text" class="form-control" required="" readonly>
+    </div>
 
-<div>
-    <input id="info-createdAt" th:field="*{post.createdAt}" type="text" required="" readonly>
-    <label for="info-createdAt">createdAt</label>
-</div>
-<div>
-    <input id="info-updatedAt" th:field="*{post.updatedAt}" type="text" required="" readonly>
-    <label for="info-updatedAt">updatedAt</label>
-</div>
-<div>
-    <input id="info-views" th:field="*{post.views}" type="text" required="" readonly>
-    <label for="info-views">views</label>
-</div>
-<div>
-    <input id="info-likes" th:field="*{post.likes}" type="text" required="" readonly>
-    <label for="info-likes">likes</label>
-</div>
+    <div class="mb-3">
+        <label for="info-createdAt" class="form-label">Created At</label>
+        <input id="info-createdAt" th:field="*{post.createdAt}" type="text" class="form-control" required="" readonly>
+    </div>
 
-<!--게시글 좋아요 버튼-->
-<div>
-    <!--좋아요 버튼 "/post-likes/{postId}/toggle" -->
-    <form th:action="@{'/post-likes/' + ${post.id} + '/toggle'}" method="post" style="display: inline;">
+    <div class="mb-3">
+        <label for="info-updatedAt" class="form-label">Updated At</label>
+        <input id="info-updatedAt" th:field="*{post.updatedAt}" type="text" class="form-control" required="" readonly>
+    </div>
 
-        <button type="submit" style="background: none; border: none; padding: 0;">
-            <img class="me-2" th:src="${post.isLiked} ? '/img/full_heart.png' : '/img/empty_heart.png'"
-                 style="width:18px; height:18px; cursor: pointer;"/>
+    <div class="mb-3">
+        <label for="info-views" class="form-label">Views</label>
+        <input id="info-views" th:field="*{post.views}" type="text" class="form-control" required="" readonly>
+    </div>
+
+    <div class="mb-3">
+        <label for="info-likes" class="form-label">Likes</label>
+        <input id="info-likes" th:field="*{post.likes}" type="text" class="form-control" required="" readonly>
+    </div>
+
+    <!-- 게시글 좋아요 버튼 -->
+    <div class="mb-3">
+        <button class="btn btn-sm me-2 "
+                th:classappend="${post.isLiked} ? 'btn-primary' : 'btn-outline-primary'"
+                th:id="'like-' + ${post.id}"
+                th:data-id="${post.id}"
+                onclick="likePost(this.getAttribute('data-id'))">👍 좋아요
         </button>
-    </form>
+        <span class="text-muted" th:text="'좋아요 ' + ${post.likes} + '명'">좋아요 3명</span>
+    </div>
+
+    <div class="mb-3">
+        <a th:href="@{'/posts/update/' + ${post.id}}" class="btn btn-warning">게시글 수정</a>
+        <a th:href="@{'/posts/delete/' + ${post.id}}" class="btn btn-danger">게시글 삭제</a>
+    </div>
 </div>
 
-
-<a th:href="@{'/posts/update' + ${post.id}}" role="button">게시글 수정</a>
-<a th:href="@{'/posts/delete' + ${post.id}}" role="button">게시글 삭제</a>
 
 <!--댓글 기능-->
 <span>댓글 <a th:text="${comments.size()}"></a> 개</span>
@@ -411,6 +419,39 @@
             .catch(error => {
                 console.error('Error:', error);
                 alert('댓글 좋아요 기능 수행 중 오류 발생: ' + error.message);
+            });
+    }
+
+    /* 게시글 좋아요 기능 수행 */
+    function likePost(postId) {
+        console.log("likePost called with ID:", postId);  // 로그 추가
+
+        fetch('/api/post-likes/' + postId, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to like post');
+                }
+                if (response.headers.get('Content-Type')?.includes('application/json')) {
+                    return response.json();
+                } else {
+                    throw new Error('Invalid response type');
+                }
+            })
+            .then(data => {
+                alert('게시글 좋아요 기능이 수행되었습니다.: ' + data.message);
+                const commentElement = document.getElementById(`post-${postId}`);
+                if (commentElement) {
+                    commentElement.remove(); // DOM에서 해당 댓글 제거
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('게시글 좋아요 기능 수행 중 오류 발생: ' + error.message);
             });
     }
 </script>

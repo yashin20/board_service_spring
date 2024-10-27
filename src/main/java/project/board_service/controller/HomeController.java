@@ -22,7 +22,7 @@ public class HomeController {
 
     /** Home Page - ("/") **/
     @GetMapping("/")
-    public String home(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+    public String home(@PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 20) Pageable pageable,
                        @RequestParam(value = "keyword", required = false) String keyword,
                        @RequestParam(value = "sort", required = false) String sort,
                        Model model) {

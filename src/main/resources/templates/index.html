@@ -10,8 +10,66 @@
 <!--header-->
 <header class="header" th:replace="~{fragments/header :: header}"></header>
 
-<h2>메인 화면</h2>
 
+
+
+<h2 class="mb-4">게시글 목록</h2>
+
+<div class="container">
+    <table class="table table-bordered table-striped" style="max-width: 1500px; margin: auto;">
+        <thead class="table-light">
+        <tr>
+            <th style="width: 50px;">#</th>
+            <th style="width: 300px;">Title</th>
+            <th style="width: 150px;">Writer</th>
+            <th style="width: 150px;">
+                <a th:href="@{/(keyword=${keyword}, sort='createdAt', page=${currentPage - 1})}" class="text-decoration-none">Created At</a>
+            </th>
+            <th style="width: 50px;">
+                <a th:href="@{/(keyword=${keyword}, sort='views', page=${currentPage - 1})}" class="text-decoration-none">Views</a>
+            </th>
+            <th style="width: 50px;">
+                <a th:href="@{/(keyword=${keyword}, sort='likes', page=${currentPage - 1})}" class="text-decoration-none">Likes</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${posts}">
+            <td th:text="${post.id}">post - id</td>
+            <td>
+                <a th:text="${post.title}" th:href="@{|/posts/${post.id}|}" class="text-decoration-none">post - title</a>
+            </td>
+            <td th:text="${post.nickname}">post - member - nickname</td>
+            <td th:text="${post.createdAt}">post - createdAt</td>
+            <td th:text="${post.views}">post - views</td>
+            <td th:text="${post.likes}">post - likes</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${!hasPrevious} ? 'disabled' : ''">
+            <a th:href="@{/(keyword=${keyword}, sort=${sort}, page=${previous})}" role="button" class="page-link">이전</a>
+        </li>
+
+        <li class="page-item" th:each="pageNum : ${#numbers.sequence(startPage, endPage)}"
+            th:classappend="${pageNum == currentPage} ? active : ''">
+            <a th:href="@{/(keyword=${keyword}, sort=${sort}, page=${pageNum - 1})}" th:text="${pageNum}"
+               role="button" class="page-link">페이지 번호</a>
+        </li>
+
+        <li class="page-item" th:classappend="${!hasNext} ? 'disabled' : ''">
+            <a th:href="@{/(keyword=${keyword}, sort=${sort}, page=${next})}" role="button" class="page-link">다음</a>
+        </li>
+    </ul>
+</nav>
+
+
+
+
+<!--
 <h2>게시글 목록</h2>
 
 <table>
@@ -64,7 +122,7 @@
            role="button" class="page-link">다음</a>
     </li>
 
-</ul>
+</ul>-->
 
 </body>
 </html>
