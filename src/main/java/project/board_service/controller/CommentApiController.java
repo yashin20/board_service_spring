@@ -32,4 +32,21 @@ public class CommentApiController {
                     .body("{\"error\": \"댓글 수정 실패\"}");
         }
     }
+
+    /**
+     * 댓글 삭제 API
+     */
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<?> deleteComment(@PathVariable Long commentId) {
+        try {
+            commentService.deleteComment(commentId); // 댓글 삭제 호출
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body("{\"message\": \"" + commentId + "번 댓글이 삭제되었습니다.\"}");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body("{\"error\": \"댓글 삭제 실패\"}");
+        }
+    }
 }
