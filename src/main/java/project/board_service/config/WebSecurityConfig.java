@@ -26,7 +26,7 @@ public class WebSecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web -> web.ignoring()
-                .requestMatchers("/img/**", "/css/**")
+                .requestMatchers("/img/**", "/css/**", "/js/**")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()));
     }
 
@@ -35,7 +35,7 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers("/", "/members/login", "/members/join").permitAll()
+                                .requestMatchers("/", "/members/login", "/members/join", "/tests/**").permitAll()
                                 .requestMatchers("/posts/{postId}").permitAll()
                                 .anyRequest().authenticated()
                 )

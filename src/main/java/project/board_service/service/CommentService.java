@@ -24,23 +24,22 @@ import java.util.List;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final PostRepository postRepository;
     private final MemberRepository memberRepository;
 
     /** Create Comment **/
     @Transactional
     public Comment createComment(CommentDto.Request dto) {
-        //1. post 주입
-        Post post = postRepository.findById(dto.getPostId())
-                .orElseThrow(() -> new DataNotFoundException("Post not found"));
-        dto.setPost(post);
-        //2. member 주입
-        if (dto.getMember() == null) {
-            Member member = memberRepository.findById(dto.getMemberId())
-                    .orElseThrow(() -> new DataNotFoundException("Member not found"));
-            dto.setMember(member);
-        }
         return commentRepository.save(dto.toEntity());
+    }
+    /**대댓글 생성 메서드 : Depth <= 1
+     * dto.getParent != null **/
+    public Comment createReply(CommentDto.Request dto) {
+        if (dto.getParent().getParent() != null) {
+            throw new IllegalArgumentException("대댓글의 대댓글은 허용되지 않습니다.");
+        }
+        Comment comment = dto.toEntity();
+        comment.setParent(comment.getParent());
+        return commentRepository.save(comment);
     }
 
     /** Read Comment **/
@@ -49,16 +48,12 @@ public class CommentService {
         return commentRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("Comment not found"));
     }
-    /*Post 기반 Comment 리스트 조회 - id DESC*/
-    public List<Comment> findCommentsByPost(Post post) {
-        return commentRepository.findByPost(post, Sort.by(Sort.Direction.DESC, "id"));
+
+    //부모댓글과 대댓글을 조회
+    public List<Comment> findCommentsByPost(Long postId) {
+        return commentRepository.findAllByPostId(postId);
     }
 
-    /** Paging Comment List **/
-    /*Post 기반 Comment 리스트 조회*/
-//    public Page<Comment> findCommentsByPostPaging(Post post, Pageable pageable) {
-//        return commentRepository.findByPost(post, pageable);
-//    }
 
     /** Update Comment **/
     @Transactional

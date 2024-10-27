@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import project.board_service.dto.CommentDto;
 import project.board_service.service.CommentService;
 import project.board_service.service.MemberService;
+import project.board_service.service.PostService;
 
 @Controller
 @RequestMapping("/comments")
@@ -14,13 +15,15 @@ public class CommentController {
 
     private final CommentService commentService;
     private final MemberService memberService;
+    private final PostService postService;
 
     /**댓글 생성**/
-    @PostMapping("/create")
-    public String createComment(@ModelAttribute CommentDto.Request request) {
+    @PostMapping("/{postId}/new")
+    public String createComment(@PathVariable Long postId, @ModelAttribute CommentDto.Request request) {
         request.setMember(memberService.getCurrentMember());
+        request.setPost(postService.findPostById(postId));
         commentService.createComment(request);
-        return "redirect:/posts/" + request.getPostId();
+        return "redirect:/posts/" + postId;
     }
 
     /**댓글 삭제**/

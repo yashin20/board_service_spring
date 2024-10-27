@@ -7,6 +7,9 @@ import project.board_service.entity.Comment;
 import project.board_service.entity.Member;
 import project.board_service.entity.Post;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CommentDto {
 
     @Data
@@ -21,11 +24,9 @@ public class CommentDto {
         @NotBlank(groups = {Create.class, Update.class}, message = "content 은 필수 입력 값입니다.")
         private String content;
 
+        private Comment parent;
         private Post post;
-        private Long postId;
-
         private Member member;
-        private Long memberId;
 
         //Dto -> Entity
         public Comment toEntity() {
@@ -33,7 +34,8 @@ public class CommentDto {
                     this.id,
                     this.content,
                     this.post,
-                    this.member
+                    this.member,
+                    this.parent
             );
         }
     }
@@ -55,6 +57,8 @@ public class CommentDto {
         private Boolean isContentUpdated;
         //좋아요 여부 확인
         private Boolean isLiked;
+
+        private List<Response> replies = new ArrayList<>();
 
         //Entity -> Dto
         public Response(Comment comment) {

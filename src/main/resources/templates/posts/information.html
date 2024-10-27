@@ -24,6 +24,8 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
     </style>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -88,13 +90,11 @@
 <!-- 댓글 작성 모달 -->
 <div id="commentModal">
     <div class="modal-content">
-        <form th:action="@{/comments/create}" th:object="${commentRequestDto}" method="post">
+        <form th:action="@{'/comments/' + ${post.id} + '/new'}" th:object="${commentRequestDto}" method="post">
             <div>
                 <span>댓글쓰기</span>
                 <span id="charCount">0/300</span>
             </div>
-
-            <input type="hidden" th:field="*{postId}" />
             <div>
                 <textarea th:field="*{content}" oninput="updateCharCount(this)"></textarea>
             </div>
@@ -104,6 +104,38 @@
         </form>
     </div>
 </div>
+
+
+<!--Comment content-->
+<section class="mb-5">
+    <div class="card bg-light">
+        <div class="card-body">
+            <!-- 부모 댓글 반복문 -->
+            <div class="d-flex mb-4" th:each="comment : ${comments}">
+                <!-- 부모 댓글 프로필 이미지 -->
+                <div class="flex-shrink-0">
+                    <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+                </div>
+                <div class="ms-3">
+                    <div class="fw-bold" th:text="${comment.nickname}">Commenter Name</div>
+                    <p th:text="${comment.content}">부모 댓글 내용</p>
+
+                    <!-- 대댓글 반복문 -->
+                    <div class="d-flex mt-4" th:each="reply : ${comment.replies}">
+                        <div class="flex-shrink-0">
+                            <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+                        </div>
+                        <div class="ms-3">
+                            <div class="fw-bold" th:text="${reply.nickname}">Replyer Name</div>
+                            <p th:text="${reply.content}">대댓글 내용</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <!--댓글 리스트-->
 <table>
@@ -142,7 +174,6 @@
         </td>
         <td><!--좋아요 버튼 "/comment-likes/{commentId}/toggle/{postId}" -->
             <form th:action="@{'/comment-likes/' + ${comment.id} + '/toggle/' + ${post.id} }" method="post" style="display: inline;">
-
                 <button type="submit" style="background: none; border: none; padding: 0;">
                     <img class="me-2" th:src="${comment.isLiked} ? '/img/full_heart.png' : '/img/empty_heart.png'" style="width:18px; height:18px; cursor: pointer;" />
                 </button>
@@ -165,16 +196,66 @@
     </tbody>
 </table>
 
+
+
+
+
+
+
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Content</th>
+        <th>Writer</th>
+        <th>Created At</th>
+        <th>Likes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 부모 댓글 반복문 -->
+    <tr th:each="comment : ${comments}">
+        <td th:text="${comment.id}">부모 댓글 ID</td>
+        <td th:text="${comment.content}">부모 댓글 내용</td>
+        <td th:text="${comment.nickname}">작성자</td>
+        <td th:text="${comment.createdAt}">작성일</td>
+        <td>
+            <img th:src="${comment.isLiked} ? '/img/full_heart.png' : '/img/empty_heart.png'"
+                 style="width:18px; height:18px;" />
+        </td>
+
+        <!-- 대댓글 리스트 반복문 -->
+        <div th:each="reply : ${comment.replies}" style="background-color: #f9f9f9;">
+            <td style="padding-left: 40px;" th:text="${reply.id}">대댓글 ID</td>
+            <td th:text="${reply.content}">대댓글 내용</td>
+            <td th:text="${reply.nickname}">작성자</td>
+            <td th:text="${reply.createdAt}">작성일</td>
+            <td>
+                <img th:src="${reply.isLiked} ? '/img/full_heart.png' : '/img/empty_heart.png'"
+                     style="width:18px; height:18px;" />
+            </td>
+        </div>
+    </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
 <span>댓글 <a th:text="${comments.size()}"></a> 개</span>
 
 <!--댓글 작성 폼-->
-<form th:action="@{/comments/create}" th:object="${commentRequestDto}" method="post">
+<form th:action="@{'/comments/' + ${post.id} + '/new'}" th:object="${commentRequestDto}" method="post">
     <div>
         <span>댓글쓰기</span>
         <span id="charCount-form">0/300</span>
     </div>
-
-    <input type="hidden" th:field="*{postId}" />
     <div>
         <textarea th:field="*{content}" oninput="updateCharCount(this)"></textarea>
     </div>
@@ -261,6 +342,9 @@
             });
     }
 </script>
-
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
 </body>
 </html>

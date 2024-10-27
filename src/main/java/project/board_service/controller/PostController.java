@@ -75,30 +75,48 @@ public class PostController {
     /** 게시글 상세 정보 (post information) - "/posts/{postId}" */
     @GetMapping("/{postId}")
     public String postInformation(@PathVariable Long postId, Model model) {
-        //1. 게시글 정보 (post information)
+        /*1. 게시글 정보*/
         Post post = postService.findPostOnlyView(postId);
         PostDto.Response postDto = new PostDto.Response(post);
         //현재 로그인된 경우 -> 좋아요 여부 표시
         if(memberService.isLoggedIn()) {
-            postDto.setIsLiked(postLikesService.isLikedByMember(memberService.getCurrentMember().getId(), postId));
+            Long memberId = memberService.getCurrentMember().getId();
+            postDto.setIsLiked(postLikesService.isLikedByMember(memberId, postId));
         }
         model.addAttribute("post", postDto);
 
-        //2. 댓글 리스트 - 게시글 소속 (post's comment list)
-        List<Comment> comments = commentService.findCommentsByPost(post);
-        List<CommentDto.Response> list = comments.stream().map(comment -> {
+        /*2. 댓글 리스트 조회 - 부모 댓글 / 대댓글 모두 포함*/
+        List<Comment> comments = commentService.findCommentsByPost(postId);
+
+        /*3. 댓글 및 대댓글을 DTO 변환*/
+        List<CommentDto.Response> commentDtos = comments.stream()
+                .filter(comment -> comment.getParent() == null) //부모 댓글만 필터링
+                .map(comment -> {
             CommentDto.Response commentDto = new CommentDto.Response(comment);
             //현재 로그인된 경우 -> 좋아요 여부 표시
             if(memberService.isLoggedIn()) {
-                commentDto.setIsLiked(commentLikesService.isLikedByMember(memberService.getCurrentMember().getId(), comment.getId()));
+                Long memberId = memberService.getCurrentMember().getId();
+                commentDto.setIsLiked(commentLikesService.isLikedByMember(memberId, comment.getId()));
             }
+
+            // 대댓글 변환
+            List<CommentDto.Response> replyDtos = comment.getReplies().stream().map(reply -> {
+                CommentDto.Response replyDto = new CommentDto.Response(reply);
+                //현재 로그인된 경우 -> 좋아요 여부 표시
+                if(memberService.isLoggedIn()) {
+                    Long memberId = memberService.getCurrentMember().getId();
+                    replyDto.setIsLiked(commentLikesService.isLikedByMember(memberId, reply.getId()));
+                }
+                return replyDto;
+            }).toList();
+
+            commentDto.setReplies(replyDtos);
             return commentDto;
         }).toList();
-        model.addAttribute("comments", list); //comment dto list
+        model.addAttribute("comments", commentDtos); //comment dto list
 
         //3. 댓글 작성 폼
         CommentDto.Request commentRequestDto = new CommentDto.Request();
-        commentRequestDto.setPostId(postId);
         model.addAttribute("commentRequestDto", commentRequestDto);
 
         return "posts/information";

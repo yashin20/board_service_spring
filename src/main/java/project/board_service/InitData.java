@@ -59,9 +59,15 @@ public class InitData {
             }
             Post post1 = createPost("comment test post", "content-comment", member1);
 
+
+            Comment comment = createComment("부모댓글 입니다.", post1, member1);
             /*댓글 생성*/
             for (int i = 1; i <= 30; i++) {
                 createComment("comment" + i, post1, member1);
+
+                if (i % 5 == 0) {
+                    createReply(comment, "대댓글 입니다.", post1, member1);
+                }
             }
 
         }
@@ -94,6 +100,17 @@ public class InitData {
             dto.setContent(content);
             dto.setPost(post);
             dto.setMember(member);
+            Comment comment = dto.toEntity();
+            em.persist(comment);
+            return comment;
+        }
+
+        public Comment createReply(Comment parent, String content, Post post, Member member) {
+            CommentDto.Request dto = new CommentDto.Request();
+            dto.setContent(content);
+            dto.setPost(post);
+            dto.setMember(member);
+            dto.setParent(parent);
             Comment comment = dto.toEntity();
             em.persist(comment);
             return comment;
