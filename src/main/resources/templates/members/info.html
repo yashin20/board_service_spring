@@ -3,40 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Member Information Page</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
+<!--header-->
+<header class="header" th:replace="~{fragments/header :: header}"></header>
 
-<h2>회원 정보 페이지</h2>
+<div class="container mt-5">
+    <!-- 회원 정보 카드 -->
+    <div class="card shadow-sm" style="max-width: 600px; margin: auto;">
+        <div class="card-body">
 
-<div>
-    <input id="info-id" th:field="*{currentMember.id}" type="text" required="" readonly>
-    <label for="info-id">ID</label>
+            <h2 class="text-center mb-4">회원 정보 페이지</h2>
+
+            <div class="mb-3">
+                <label for="info-id" class="form-label">ID</label>
+                <input id="info-id" th:field="*{currentMember.id}" type="text" class="form-control" required readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="info-username" class="form-label">Username</label>
+                <input id="info-username" th:field="*{currentMember.username}" type="text" class="form-control" required
+                       readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="info-nickname" class="form-label">Nickname</label>
+                <input id="info-nickname" th:field="*{currentMember.nickname}" type="text" class="form-control" required
+                       readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="info-email" class="form-label">E-Mail</label>
+                <input id="info-email" th:field="*{currentMember.email}" type="text" class="form-control" required
+                       readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="info-phone" class="form-label">Phone</label>
+                <input id="info-phone" th:field="*{currentMember.phone}" type="text" class="form-control" required
+                       readonly>
+            </div>
+
+            <div>
+                <a href="/members/info/update" class="btn btn-primary">정보 수정</a>
+            </div>
+
+        </div>
+    </div>
 </div>
 
-<div>
-    <input id="info-username" th:field="*{currentMember.username}" type="text" required="" readonly>
-    <label for="info-username">Username</label>
-</div>
-
-<div>
-    <input id="info-nickname" th:field="*{currentMember.nickname}" type="text" required="" readonly>
-    <label for="info-nickname">Nickname</label>
-</div>
-
-<div>
-    <input id="info-email" th:field="*{currentMember.email}" type="text" required="" readonly>
-    <label for="info-email">E-Mail</label>
-</div>
-
-<div>
-    <input id="info-phone" th:field="*{currentMember.phone}" type="text" required="" readonly>
-    <label for="info-phone">Phone</label>
-</div>
-
-<!--<div>
-    <input id="info-role" th:field="*{currentMember.role.name()}" type="text" required="" readonly>
-    <label for="info-role">Role</label>
-</div>-->
 
 </body>
 </html>

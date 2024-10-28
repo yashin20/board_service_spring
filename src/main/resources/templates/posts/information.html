@@ -49,7 +49,8 @@
                     </div>
 
                     <div class="text-end">
-                        <p class="mb-0 fw-bold" th:text="'좋아요 ' + ${post.likes} + ' | 조회수 ' + ${post.views} + ' | 댓글 ' + ${comments.size()}">
+                        <p class="mb-0 fw-bold"
+                           th:text="'좋아요 ' + ${post.likes} + ' | 조회수 ' + ${post.views} + ' | 댓글 ' + ${comments.size()}">
                             좋아요 | 조회수 | 댓글 개수
                         </p>
                     </div>
@@ -75,189 +76,197 @@
                     <a th:href="@{'/posts/delete/' + ${post.id}}" class="btn btn-danger">게시글 삭제</a>
                 </div>
 
-            </div>
-        </div>
 
-
-        <!-- 댓글 기능 -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <span class="fw-bold">댓글 <span th:text="${comments.size()}"></span> 개</span>
-            <a href="#" class="btn btn-primary" onclick="openModal()">댓글쓰기</a>
-        </div>
-
-        <!-- 댓글 작성 모달 -->
-        <div id="commentModal">
-            <div class="modal-content">
-                <form th:action="@{'/comments/' + ${post.id} + '/new'}" th:object="${commentRequestDto}" method="post">
-                    <div>
-                        <span>댓글쓰기</span>
-                        <span id="charCount">0/300</span>
-                    </div>
-                    <div>
-                        <textarea th:field="*{content}" oninput="updateCharCount(this)"></textarea>
-                    </div>
-
-                    <button type="button" onclick="closeModal()">취소</button>
-                    <button type="submit">확인</button>
-                </form>
-            </div>
-        </div>
-
-
-        <!--Comment content-->
-        <section class="mb-5">
-            <div class="card bg-light">
-                <div class="card-body">
-
-
-                    <!-- 부모 댓글 반복문 -->
-                    <div class="d-flex mb-4" th:each="comment : ${comments}">
-                        <!-- 부모 댓글 프로필 이미지 -->
-                        <div class="flex-shrink-0">
-                            <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                 alt="프로필 이미지">
-                        </div>
-
-                        <div class="ms-3 w-100">
-                            <div class="d-flex justify-content-between">
-                                <!-- 닉네임 및 날짜 -->
-                                <div>
-                                    <!-- 닉네임 -->
-                                    <div class="fw-bold" th:text="${comment.nickname}">Commenter Name</div>
-
-                                    <!-- 생성일자 및 수정 여부 표시 -->
-                                    <p class="text-muted mb-1">
-                                        <span th:text="${comment.createdAt}">2024-10-27</span>
-                                        <span th:if="${comment.isContentUpdated}">(수정됨)</span>
-                                    </p>
-                                </div>
-
-                                <!-- 수정 / 삭제 버튼 -->
-                                <div>
-                                    <!--수정 버튼-->
-                                    <button class="btn btn-sm btn-outline-secondary"
-                                            th:id="'update-' + ${comment.id}"
-                                            th:data-id="${comment.id}"
-                                            onclick="updateComment(this.getAttribute('data-id'))">수정
-                                    </button>
-
-                                    <!--삭제 버튼-->
-                                    <button class="btn btn-sm btn-outline-danger"
-                                            th:id="'delete-' + ${comment.id}"
-                                            th:data-id="${comment.id}"
-                                            onclick="deleteComment(this.getAttribute('data-id'))">삭제
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- 부모 댓글 내용 -->
-                            <p th:text="${comment.content}"
-                               th:id="'content-' + ${comment.id}">부모 댓글 내용</p>
-
-                            <!--댓글 수정을 위한 <textarea> / <button>-->
-                            <textarea th:id="'textarea-' + ${comment.id}" style="display:none;" required></textarea>
-                            <button th:id="'submit-' + ${comment.id}"
-                                    style="display:none;" type="button"
-                                    th:data-id="${comment.id}"
-                                    onclick="submitComment(this.getAttribute('data-id'))">게시
-                            </button>
-
-
-                            <!-- 좋아요 버튼 -->
-                            <div class="d-flex align-items-center mb-3">
-                                <button class="btn btn-sm me-2 "
-                                        th:classappend="${comment.isLiked} ? 'btn-primary' : 'btn-outline-primary'"
-                                        th:id="'like-' + ${comment.id}"
-                                        th:data-id="${comment.id}"
-                                        onclick="likeComment(this.getAttribute('data-id'))">👍 좋아요
-                                </button>
-                                <span class="text-muted" th:text="'좋아요 ' + ${comment.likes} + '명'">좋아요 3명</span>
-                            </div>
-
-                            <!-- 대댓글 반복문 -->
-                            <div class="mt-4 ps-4 border-start border-2" th:each="reply : ${comment.replies}">
-                                <div class="d-flex mb-3">
-                                    <!-- 대댓글 프로필 이미지 -->
-                                    <div class="flex-shrink-0">
-                                        <img class="rounded-circle" src="https://dummyimage.com/40x40/ced4da/6c757d.jpg"
-                                             alt="프로필 이미지">
-                                    </div>
-
-                                    <div class="ms-3 w-100">
-                                        <div class="d-flex justify-content-between">
-                                            <!-- 대댓글 작성자 및 날짜 -->
-                                            <div>
-                                                <div class="fw-bold" th:text="${reply.nickname}">Replyer Name</div>
-                                                <p class="text-muted mb-1">
-                                                    <span th:text="${reply.createdAt}">2024-10-27</span>
-                                                    <span th:if="${reply.isContentUpdated}">(수정됨)</span>
-                                                </p>
-                                            </div>
-
-                                            <!-- 수정 / 삭제 버튼 -->
-                                            <div>
-                                                <!--수정 버튼-->
-                                                <button class="btn btn-sm btn-outline-secondary"
-                                                        th:id="'update-' + ${reply.id}"
-                                                        th:data-id="${reply.id}"
-                                                        onclick="updateComment(this.getAttribute('data-id'))">수정
-                                                </button>
-
-                                                <!--삭제 버튼-->
-                                                <button class="btn btn-sm btn-outline-danger"
-                                                        th:id="'delete-' + ${reply.id}"
-                                                        th:data-id="${reply.id}"
-                                                        onclick="deleteComment(this.getAttribute('data-id'))">삭제
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <!-- 대댓글 내용 -->
-                                        <p th:text="${reply.content}"
-                                           th:id="'content-' + ${reply.id}">대댓글 내용</p>
-
-                                        <!--댓글 수정을 위한 <textarea> / <button>-->
-                                        <textarea th:id="'textarea-' + ${reply.id}" style="display:none;"
-                                                  required></textarea>
-                                        <button th:id="'submit-' + ${reply.id}"
-                                                style="display:none;" type="button"
-                                                th:data-id="${reply.id}"
-                                                onclick="submitComment(this.getAttribute('data-id'))">게시
-                                        </button>
-
-                                        <!-- 좋아요 버튼 -->
-                                        <div class="d-flex align-items-center mb-3">
-                                            <button class="btn btn-sm me-2 "
-                                                    th:classappend="${reply.isLiked} ? 'btn-primary' : 'btn-outline-primary'"
-                                                    th:id="'like-' + ${reply.id}"
-                                                    th:data-id="${reply.id}"
-                                                    onclick="likeComment(this.getAttribute('data-id'))">👍 좋아요
-                                            </button>
-                                            <span class="text-muted"
-                                                  th:text="'좋아요 ' + ${reply.likes} + '명'">좋아요 3명</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
+                <!-- 댓글 기능 -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="fw-bold">댓글 <span th:text="${comments.size()}"></span> 개</span>
+                    <a href="#" class="btn btn-primary" onclick="openModal()">댓글쓰기</a>
                 </div>
-            </div>
-        </section>
+
+                <!-- 댓글 작성 모달 -->
+                <div id="commentModal">
+                    <div class="modal-content">
+                        <form th:action="@{'/comments/' + ${post.id} + '/new'}" th:object="${commentRequestDto}"
+                              method="post">
+                            <div>
+                                <span>댓글쓰기</span>
+                                <span id="charCount">0/300</span>
+                            </div>
+                            <div>
+                                <textarea th:field="*{content}" oninput="updateCharCount(this)"></textarea>
+                            </div>
+
+                            <button type="button" onclick="closeModal()">취소</button>
+                            <button type="submit">확인</button>
+                        </form>
+                    </div>
+                </div>
 
 
-        <span class="fw-bold">댓글 <a th:text="${comments.size()}"></a> 개</span>
-        <!-- 댓글 작성 폼 -->
-        <form th:action="@{'/comments/' + ${post.id} + '/new'}" th:object="${commentRequestDto}" method="post" class="mb-4">
-            <div class="mb-3">
-                <label for="commentTextarea" class="form-label">댓글쓰기</label>
-                <span id="charCount-form" class="text-muted">0/300</span>
-                <textarea th:field="*{content}" id="commentTextarea" class="form-control" rows="4" oninput="updateCharCount(this)" maxlength="300"></textarea>
+                <!--Comment content-->
+                <section class="mb-5">
+                    <div class="card bg-light">
+                        <div class="card-body">
+
+
+                            <!-- 부모 댓글 반복문 -->
+                            <div class="d-flex mb-4" th:each="comment : ${comments}">
+                                <!-- 부모 댓글 프로필 이미지 -->
+                                <div class="flex-shrink-0">
+                                    <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                         alt="프로필 이미지">
+                                </div>
+
+                                <div class="ms-3 w-100">
+                                    <div class="d-flex justify-content-between">
+                                        <!-- 닉네임 및 날짜 -->
+                                        <div>
+                                            <!-- 닉네임 -->
+                                            <div class="fw-bold" th:text="${comment.nickname}">Commenter Name</div>
+
+                                            <!-- 생성일자 및 수정 여부 표시 -->
+                                            <p class="text-muted mb-1">
+                                                <span th:text="${comment.createdAt}">2024-10-27</span>
+                                                <span th:if="${comment.isContentUpdated}">(수정됨)</span>
+                                            </p>
+                                        </div>
+
+                                        <!-- 수정 / 삭제 버튼 -->
+                                        <div>
+                                            <!--수정 버튼-->
+                                            <button class="btn btn-sm btn-outline-secondary"
+                                                    th:id="'update-' + ${comment.id}"
+                                                    th:data-id="${comment.id}"
+                                                    onclick="updateComment(this.getAttribute('data-id'))">수정
+                                            </button>
+
+                                            <!--삭제 버튼-->
+                                            <button class="btn btn-sm btn-outline-danger"
+                                                    th:id="'delete-' + ${comment.id}"
+                                                    th:data-id="${comment.id}"
+                                                    onclick="deleteComment(this.getAttribute('data-id'))">삭제
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- 부모 댓글 내용 -->
+                                    <p th:text="${comment.content}"
+                                       th:id="'content-' + ${comment.id}">부모 댓글 내용</p>
+
+                                    <!--댓글 수정을 위한 <textarea> / <button>-->
+                                    <textarea th:id="'textarea-' + ${comment.id}" style="display:none;"
+                                              required></textarea>
+                                    <button th:id="'submit-' + ${comment.id}"
+                                            style="display:none;" type="button"
+                                            th:data-id="${comment.id}"
+                                            onclick="submitComment(this.getAttribute('data-id'))">게시
+                                    </button>
+
+
+                                    <!-- 좋아요 버튼 -->
+                                    <div class="d-flex align-items-center mb-3">
+                                        <button class="btn btn-sm me-2 "
+                                                th:classappend="${comment.isLiked} ? 'btn-primary' : 'btn-outline-primary'"
+                                                th:id="'like-' + ${comment.id}"
+                                                th:data-id="${comment.id}"
+                                                onclick="likeComment(this.getAttribute('data-id'))">👍 좋아요
+                                        </button>
+                                        <span class="text-muted me-3" th:text="'좋아요 ' + ${comment.likes} + '명'">좋아요 3명</span>
+
+                                        <button class="btn btn-sm btn-outline-primary">답글</button>
+                                    </div>
+
+                                    <!-- 대댓글 반복문 -->
+                                    <div class="mt-4 ps-4 border-start border-2" th:each="reply : ${comment.replies}">
+                                        <div class="d-flex mb-3">
+                                            <!-- 대댓글 프로필 이미지 -->
+                                            <div class="flex-shrink-0">
+                                                <img class="rounded-circle"
+                                                     src="https://dummyimage.com/40x40/ced4da/6c757d.jpg"
+                                                     alt="프로필 이미지">
+                                            </div>
+
+                                            <div class="ms-3 w-100">
+                                                <div class="d-flex justify-content-between">
+                                                    <!-- 대댓글 작성자 및 날짜 -->
+                                                    <div>
+                                                        <div class="fw-bold" th:text="${reply.nickname}">Replyer Name
+                                                        </div>
+                                                        <p class="text-muted mb-1">
+                                                            <span th:text="${reply.createdAt}">2024-10-27</span>
+                                                            <span th:if="${reply.isContentUpdated}">(수정됨)</span>
+                                                        </p>
+                                                    </div>
+
+                                                    <!-- 수정 / 삭제 버튼 -->
+                                                    <div>
+                                                        <!--수정 버튼-->
+                                                        <button class="btn btn-sm btn-outline-secondary"
+                                                                th:id="'update-' + ${reply.id}"
+                                                                th:data-id="${reply.id}"
+                                                                onclick="updateComment(this.getAttribute('data-id'))">수정
+                                                        </button>
+
+                                                        <!--삭제 버튼-->
+                                                        <button class="btn btn-sm btn-outline-danger"
+                                                                th:id="'delete-' + ${reply.id}"
+                                                                th:data-id="${reply.id}"
+                                                                onclick="deleteComment(this.getAttribute('data-id'))">삭제
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- 대댓글 내용 -->
+                                                <p th:text="${reply.content}"
+                                                   th:id="'content-' + ${reply.id}">대댓글 내용</p>
+
+                                                <!--댓글 수정을 위한 <textarea> / <button>-->
+                                                <textarea th:id="'textarea-' + ${reply.id}" style="display:none;"
+                                                          required></textarea>
+                                                <button th:id="'submit-' + ${reply.id}"
+                                                        style="display:none;" type="button"
+                                                        th:data-id="${reply.id}"
+                                                        onclick="submitComment(this.getAttribute('data-id'))">게시
+                                                </button>
+
+                                                <!-- 좋아요 버튼 -->
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <button class="btn btn-sm me-2 "
+                                                            th:classappend="${reply.isLiked} ? 'btn-primary' : 'btn-outline-primary'"
+                                                            th:id="'like-' + ${reply.id}"
+                                                            th:data-id="${reply.id}"
+                                                            onclick="likeComment(this.getAttribute('data-id'))">👍 좋아요
+                                                    </button>
+                                                    <span class="text-muted"
+                                                          th:text="'좋아요 ' + ${reply.likes} + '명'">좋아요 3명</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </section>
+
+
+                <span class="fw-bold">댓글 <a th:text="${comments.size()}"></a> 개</span>
+                <!-- 댓글 작성 폼 -->
+                <form th:action="@{'/comments/' + ${post.id} + '/new'}" th:object="${commentRequestDto}" method="post"
+                      class="mb-4">
+                    <div class="mb-3">
+                        <label for="commentTextarea" class="form-label">댓글쓰기</label>
+                        <span id="charCount-form" class="text-muted">0/300</span>
+                        <textarea th:field="*{content}" id="commentTextarea" class="form-control" rows="4"
+                                  oninput="updateCharCount(this)" maxlength="300"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">등록</button>
+                </form>
+
             </div>
-            <button type="submit" class="btn btn-primary">등록</button>
-        </form>
+        </div>
 
 
     </div>

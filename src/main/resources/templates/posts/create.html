@@ -1,43 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Post Create Page</title>
+    <meta charset="UTF-8">
+    <title>Post Create Page</title>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet"/>
 </head>
 <body>
 
-<h2> 게시글 생성 페이지 </h2>
+<!--header-->
+<header class="header" th:replace="~{fragments/header :: header}"></header>
+<div class="d-flex" id="wrapper">
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
 
-<form th:action="@{/posts/new}" th:object="${createPostForm}" method="post">
+        <div class="container mt-5">
+            <!-- Page content-->
+            <div class="container-fluid">
 
-  <div>
-    <input id="create-title" th:field="*{title}" type="text" placeholder="title" required="">
-    <label for="create-title">Title</label>
+                <h2 class="text-center mb-4">게시글 생성 페이지</h2>
 
-    <!-- Error message -->
-    <div th:if="${titleError}">
-      <p th:text="${titleError}">Error message here</p>
+                <form th:action="@{/posts/new}" th:object="${createPostForm}" method="post"
+                      class="p-4 border rounded shadow-sm bg-light">
+
+                    <!-- Title Field -->
+                    <div class="mb-3">
+                        <label for="create-title" class="form-label">제목</label>
+                        <input id="create-title" th:field="*{title}" type="text"
+                               class="form-control" placeholder="제목을 입력하세요" required>
+                        <!-- Error message -->
+                        <div th:if="${titleError}" class="form-text text-danger">
+                            <p th:text="${titleError}"></p>
+                        </div>
+                    </div>
+
+                    <!-- Content Field -->
+                    <div class="mb-3">
+                        <label for="create-content" class="form-label">내용</label>
+                        <textarea id="create-content" th:field="*{content}" rows="20"
+                                  class="form-control" placeholder="내용을 입력하세요" required></textarea>
+                        <!-- Error message -->
+                        <div th:if="${contentError}" class="form-text text-danger">
+                            <p th:text="${contentError}"></p>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-primary">작성하기</button>
+                    </div>
+
+                    <!-- General Error Message -->
+                    <div th:if="${errorMessage}" class="form-text text-danger text-center">
+                        <p th:text="${errorMessage}"></p>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
     </div>
-  </div>
-
-  <div>
-    <textarea id="create-content" th:field="*{content}" rows="5" placeholder="content" required=""></textarea>
-    <label for="create-content">Content</label>
-
-    <!-- Error message -->
-    <div th:if="${contentError}">
-      <p th:text="${contentError}">Error message here</p>
-    </div>
-  </div>
-
-  <button type="submit">Submit</button>
-
-  <!-- Error message -->
-  <div th:if="${errorMessage}">
-    <p th:text="${errorMessage}">Error message here</p>
-  </div>
-
-</form>
-
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

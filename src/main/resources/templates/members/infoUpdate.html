@@ -3,65 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Member Information Page</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
+<!--header-->
+<header class="header" th:replace="~{fragments/header :: header}"></header>
 
-<h2>회원 정보 수정 페이지</h2>
+<div class="container mt-5">
+    <!-- 회원 정보 카드 -->
+    <div class="card shadow-sm" style="max-width: 600px; margin: auto;">
+        <div class="card-body">
 
-<form th:action="@{/members/info/update}" th:object="${updateForm}" method="post">
+            <h2 class="text-center mb-4">회원 정보 수정 페이지</h2>
 
-    <!--'id' Update 를 위함. 히든 처리-->
-    <div>
-        <input id="infoUpdate-id" th:field="*{id}" type="text" required="" readonly hidden="hidden">
-    </div>
+            <form th:action="@{/members/info/update}" th:object="${updateForm}" method="post">
 
-    <!--'username' 수정 불가-->
-    <div>
-        <input id="infoUpdate-username" th:field="*{username}" type="text" required="" readonly>
-        <label for="infoUpdate-username">Username</label>
-    </div>
+                <!--'id' Update 를 위함. 히든 처리-->
+                <div class="mb-3">
+                    <input id="infoUpdate-id" th:field="*{id}" type="text" required="" readonly hidden="hidden">
+                </div>
 
-    <!--'nickname' 수정 가능-->
-    <div>
-        <input id="infoUpdate-nickname" th:field="*{nickname}" type="text" required="">
-        <label for="infoUpdate-nickname">Nickname</label>
+                <!--'username' 수정 불가-->
+                <div class="mb-3">
+                    <label for="infoUpdate-username" class="form-label">Username</label>
+                    <input id="infoUpdate-username" th:field="*{username}" type="text" class="form-control" required readonly>
+                </div>
 
-        <!-- Error message -->
-        <div th:if="${nicknameError}">
-            <p th:text="${nicknameError}">Error message here</p>
+                <!--'nickname' 수정 가능-->
+                <div class="mb-3">
+                    <label for="infoUpdate-nickname" class="form-label">Nickname</label>
+                    <input id="infoUpdate-nickname" th:field="*{nickname}" type="text" class="form-control" required>
+
+                    <!-- Error message -->
+                    <div th:if="${nicknameError}" class="text-danger mb-3">
+                        <p th:text="${nicknameError}">Error message here</p>
+                    </div>
+                </div>
+
+                <!--'email' 수정 가능-->
+                <div class="mb-3">
+                    <label for="infoUpdate-email" class="form-label">E-Mail</label>
+                    <input id="infoUpdate-email" th:field="*{email}" type="text" class="form-control" required>
+
+                    <!-- Error message -->
+                    <div th:if="${emailError}" class="text-danger mb-3">
+                        <p th:text="${emailError}">Error message here</p>
+                    </div>
+                </div>
+
+                <!--'phone' 수정 가능-->
+                <div class="mb-3">
+                    <label for="infoUpdate-phone" class="form-label">Phone</label>
+                    <input id="infoUpdate-phone" th:field="*{phone}" type="text" class="form-control" required>
+
+                    <!-- Error message -->
+                    <div th:if="${phoneError}" class="text-danger mb-3">
+                        <p th:text="${phoneError}">Error message here</p>
+                    </div>
+                </div>
+
+                <!-- Error message -->
+                <div th:if="${errorMessage}" class="text-danger mb-3">
+                    <p th:text="${errorMessage}">Error message here</p>
+                </div>
+
+
+                <div class="d-flex justify-content-between">
+                    <div class="text-start">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <div class="text-end">
+                        <a href="/members/info/updatePassword" class="btn btn-primary">비밀번호 수정</a>
+                    </div>
+                </div>
+
+            </form>
+
         </div>
     </div>
-
-    <!--'email' 수정 가능-->
-    <div>
-        <input id="infoUpdate-email" th:field="*{email}" type="text" required="">
-        <label for="infoUpdate-email">E-Mail</label>
-
-        <!-- Error message -->
-        <div th:if="${emailError}">
-            <p th:text="${emailError}">Error message here</p>
-        </div>
-    </div>
-
-    <!--'phone' 수정 가능-->
-    <div>
-        <input id="infoUpdate-phone" th:field="*{phone}" type="text" required="">
-        <label for="infoUpdate-phone">Phone</label>
-
-        <!-- Error message -->
-        <div th:if="${phoneError}">
-            <p th:text="${phoneError}">Error message here</p>
-        </div>
-    </div>
-
-    <button type="submit">Submit</button>
-
-    <!-- Error message -->
-    <div th:if="${errorMessage}">
-        <p th:text="${errorMessage}">Error message here</p>
-    </div>
-
-</form>
-
+</div>
 </body>
 </html>
