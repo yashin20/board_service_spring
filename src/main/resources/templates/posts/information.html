@@ -248,20 +248,17 @@
         </section>
 
 
-        <span>댓글 <a th:text="${comments.size()}"></a> 개</span>
-
-        <!--댓글 작성 폼-->
-        <form th:action="@{'/comments/' + ${post.id} + '/new'}" th:object="${commentRequestDto}" method="post">
-            <div>
-                <span>댓글쓰기</span>
-                <span id="charCount-form">0/300</span>
+        <span class="fw-bold">댓글 <a th:text="${comments.size()}"></a> 개</span>
+        <!-- 댓글 작성 폼 -->
+        <form th:action="@{'/comments/' + ${post.id} + '/new'}" th:object="${commentRequestDto}" method="post" class="mb-4">
+            <div class="mb-3">
+                <label for="commentTextarea" class="form-label">댓글쓰기</label>
+                <span id="charCount-form" class="text-muted">0/300</span>
+                <textarea th:field="*{content}" id="commentTextarea" class="form-control" rows="4" oninput="updateCharCount(this)" maxlength="300"></textarea>
             </div>
-            <div>
-                <textarea th:field="*{content}" oninput="updateCharCount(this)"></textarea>
-            </div>
-
-            <button type="submit">등록</button>
+            <button type="submit" class="btn btn-primary">등록</button>
         </form>
+
 
     </div>
 </div>
