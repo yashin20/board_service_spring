@@ -18,6 +18,8 @@ public class Post extends BaseEntity {
     private Long id;
 
     private String title;
+    @Lob
+    @Column(name = "content", columnDefinition = "TEXT") // MySQL VARCHAR 최대 길이 (TEXT 유형 = 65,535)
     private String content;
 
     private Integer views = 0;

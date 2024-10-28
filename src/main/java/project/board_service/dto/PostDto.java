@@ -1,7 +1,9 @@
 package project.board_service.dto;
 
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import project.board_service.entity.Member;
 import project.board_service.entity.Post;
@@ -21,6 +23,7 @@ public class PostDto {
         private String title;
 
         @NotBlank(groups = {Create.class, Update.class}, message = "Content 는 필수 입력 값입니다.")
+        @Size(max = 65535, message = "Content 는 최대 65535자까지 입력 가능합니다.")
         private String content;
 
         //member - 작성자
@@ -42,6 +45,7 @@ public class PostDto {
 
         private Long id;
         private String title;
+        @Lob
         private String content;
 
         private Integer views;

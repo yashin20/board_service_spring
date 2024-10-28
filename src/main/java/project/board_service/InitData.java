@@ -43,6 +43,26 @@ public class InitData {
         @Transactional
         public void init() {
 
+            String lyric = "멋지게 골인\n" +
+                    "프러포즈 같은 세리머니 (oh yeah)\n" +
+                    "정해보자 호칭\n" +
+                    "허니 말고 자기 아님 달링\n" +
+                    "낯간지럽네 상상해봐도\n" +
+                    "긴장돼 필요해 a lot of alcohol\n" +
+                    "덩치는 산만해도 네 앞에선 작아지네\n" +
+                    "Oh 내 맘 알까나\n" +
+                    "첫눈에 미끄러지듯이 falling in love\n" +
+                    "내 맘을 훔친 범인인 건 바로 너\n" +
+                    "너의 미모 질투해 여신도 (wow)\n" +
+                    "내 심장의 떨림은 진동 brrr\n" +
+                    "치명적인 매력이 날 killin'\n" +
+                    "섹시해 날 자극하는 hot chili woo\n" +
+                    "오해하지 마 나는 진짜 진심으로 채워줄게 너의 빈 잔\n" +
+                    "지금 내 눈에 제일 아름다운 건 너야 lady\n" +
+                    "널 향한 내 맘이 돈이면 아마 난 billionaire\n" +
+                    "널 좋아해";
+
+
             /*Member 10개 생성*/
             Member member1 = createMember("member1", "1q2w3e4r~!");
             Member member2 = createMember("member2", "1q2w3e4r~!");
@@ -57,7 +77,9 @@ public class InitData {
                 createPost("Post Title" + i , "content" + i + i, member2);
                 createPost(i + "게시글 입니다.", "게시글 내용입니다." + i, member3);
             }
-            Post post1 = createPost("comment test post", "content-comment", member1);
+            Post post1 = createPost("게시글 제목 입니다.",
+                    lyric,
+                    member1);
 
 
             Comment comment = createComment("부모댓글 입니다.", post1, member1);
