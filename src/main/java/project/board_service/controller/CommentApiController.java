@@ -6,7 +6,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.board_service.dto.CommentDto;
+import project.board_service.entity.Comment;
 import project.board_service.service.CommentService;
+import project.board_service.service.MemberService;
+import project.board_service.service.PostService;
 
 @RestController
 @RequestMapping("/api/comments")
@@ -14,6 +17,29 @@ import project.board_service.service.CommentService;
 public class CommentApiController {
 
     private final CommentService commentService;
+    private final MemberService memberService;
+
+    /**
+     * 대댓글 생성 API
+     */
+    @PostMapping("/create-reply/{parentId}")
+    public ResponseEntity<?> createReply(@PathVariable Long parentId, @RequestBody CommentDto.Request dto) {
+        try {
+            Comment parent = commentService.findCommentById(parentId);
+            dto.setParent(parent);
+            dto.setMember(memberService.getCurrentMember());
+            dto.setPost(parent.getPost());
+            commentService.createReply(dto);
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body("{\"message\": \"" + parent.getId() + "의 대댓글이 작성되었습니다.\"}");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body("{\"error\": \"대댓글 작성 실패\"}");
+        }
+    }
+
 
     /**
      * 댓글 수정 API

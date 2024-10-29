@@ -33,12 +33,12 @@ public class CommentService {
     }
     /**대댓글 생성 메서드 : Depth <= 1
      * dto.getParent != null **/
+    @Transactional
     public Comment createReply(CommentDto.Request dto) {
         if (dto.getParent().getParent() != null) {
             throw new IllegalArgumentException("대댓글의 대댓글은 허용되지 않습니다.");
         }
         Comment comment = dto.toEntity();
-        comment.setParent(comment.getParent());
         return commentRepository.save(comment);
     }
 

@@ -173,8 +173,22 @@
                                         </button>
                                         <span class="text-muted me-3" th:text="'좋아요 ' + ${comment.likes} + '명'">좋아요 3명</span>
 
-                                        <button class="btn btn-sm btn-outline-primary">답글</button>
+                                        <!--대댓글 작성 폼을 보여주는 버튼-->
+                                        <button class="btn btn-sm btn-outline-primary"
+                                                th:id="'create-reply-' + ${comment.id}"
+                                                th:data-id="${comment.id}"
+                                                onclick="replyForm(this.getAttribute('data-id'))">답글</button>
                                     </div>
+
+                                    <!--대댓글 작성을 위한 <textarea> / <button>-->
+                                    <textarea th:id="'reply-textarea-' + ${comment.id}" style="display:none;"
+                                              required></textarea>
+                                    <button th:id="'reply-submit-' + ${comment.id}"
+                                            style="display:none;" type="button"
+                                            th:data-id="${comment.id}"
+                                            onclick="submitReply(this.getAttribute('data-id'))">게시
+                                    </button>
+
 
                                     <!-- 대댓글 반복문 -->
                                     <div class="mt-4 ps-4 border-start border-2" th:each="reply : ${comment.replies}">
@@ -290,6 +304,53 @@
         document.getElementById('charCount-form').innerText = `${charCount}/300`;
     }
 
+    /**대댓글 생성 관련**/
+    /*대댓글 생성 모드 활성화*/
+    function replyForm(parentId) {
+        const textarea = document.getElementById(`reply-textarea-${parentId}`);
+        const submitButton = document.getElementById(`reply-submit-${parentId}`);
+
+        textarea.style.display = 'block'; //textarea 보이기
+        submitButton.style.display = 'block'; //submitButton 보이기
+    }
+    /*대댓글 생성 기능 수행*/
+    function submitReply(commentId) {
+        const textarea = document.getElementById(`reply-textarea-${commentId}`);
+        const replyContent = textarea.value.trim(); // 입력된 내용 가져오기
+        if (!replyContent) {
+            alert("댓글 내용을 입력해주세요.");
+            return;
+        }
+
+        const requestBody = JSON.stringify({
+            content: replyContent
+        });
+
+        fetch(`/api/comments/create-reply/${commentId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: requestBody
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert("대댓글 작성에 실패했습니다.");
+                } else {
+                    alert(data.message);
+                    // 성공 시 댓글 입력란 초기화 및 화면 업데이트
+                    textarea.value = '';
+                    textarea.style.display = 'none';
+                    document.getElementById(`reply-submit-${commentId}`).style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("대댓글 작성 중 문제가 발생했습니다.");
+            });
+    }
+
 
     /* 댓글 수정 모드 활성화 */
     function updateComment(commentId) {
@@ -304,8 +365,6 @@
         submitButton.style.display = 'block'; //submitButton 보이기
         updateButton.style.display = 'none'; //updateButton 숨김
     }
-
-
     /* 댓글 수정 기능 수행 */
     function submitComment(commentId) {
         console.log("submitComment called with ID:", commentId);  // 로그 추가
@@ -409,10 +468,6 @@
             })
             .then(data => {
                 alert('댓글 좋아요 기능이 수행되었습니다.: ' + data.message);
-                const commentElement = document.getElementById(`comment-${commentId}`);
-                if (commentElement) {
-                    commentElement.remove(); // DOM에서 해당 댓글 제거
-                }
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -443,9 +498,6 @@
             .then(data => {
                 alert('게시글 좋아요 기능이 수행되었습니다.: ' + data.message);
                 const commentElement = document.getElementById(`post-${postId}`);
-                if (commentElement) {
-                    commentElement.remove(); // DOM에서 해당 댓글 제거
-                }
             })
             .catch(error => {
                 console.error('Error:', error);
