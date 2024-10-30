@@ -64,7 +64,7 @@ public class PostDto {
         public Response(Post post) {
             this.id = post.getId();
             this.title = post.getTitle();
-            this.content = post.getContent();
+            this.content = post.getContent().replace("\n", "<br>");
             this.views = post.getViews();
             this.likes = post.getLikes();
             this.nickname = post.getMember().getNickname();

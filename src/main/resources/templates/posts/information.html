@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Post Information Page</title>
@@ -59,7 +59,7 @@
                 <br>
 
 
-                <p th:text="${post.content}">게시글 본문(Post Content)</p>
+                <p th:utext="${post.content}">게시글 본문(Post Content)</p>
 
                 <div class="mb-3">
                     <button class="btn btn-sm me-2 "
@@ -131,8 +131,10 @@
                                             </p>
                                         </div>
 
+
                                         <!-- 수정 / 삭제 버튼 -->
-                                        <div>
+                                        <!-- 로그인 상태 && 작성자 == 로그인 회원 -->
+                                        <div sec:authorize="isAuthenticated()" th:if="${#authentication.name == comment.getUsername()}">
                                             <!--수정 버튼-->
                                             <button class="btn btn-sm btn-outline-secondary"
                                                     th:id="'update-' + ${comment.id}"
@@ -147,6 +149,7 @@
                                                     onclick="deleteComment(this.getAttribute('data-id'))">삭제
                                             </button>
                                         </div>
+
                                     </div>
 
                                     <!-- 부모 댓글 내용 -->
@@ -174,10 +177,12 @@
                                         <span class="text-muted me-3" th:text="'좋아요 ' + ${comment.likes} + '명'">좋아요 3명</span>
 
                                         <!--대댓글 작성 폼을 보여주는 버튼-->
+                                        <div sec:authorize="isAuthenticated()" th:if="${#authentication.name == comment.getUsername()}">
                                         <button class="btn btn-sm btn-outline-primary"
                                                 th:id="'create-reply-' + ${comment.id}"
                                                 th:data-id="${comment.id}"
                                                 onclick="replyForm(this.getAttribute('data-id'))">답글</button>
+                                        </div>
                                     </div>
 
                                     <!--대댓글 작성을 위한 <textarea> / <button>-->
@@ -213,7 +218,7 @@
                                                     </div>
 
                                                     <!-- 수정 / 삭제 버튼 -->
-                                                    <div>
+                                                    <div sec:authorize="isAuthenticated()" th:if="${#authentication.name == comment.getUsername()}">
                                                         <!--수정 버튼-->
                                                         <button class="btn btn-sm btn-outline-secondary"
                                                                 th:id="'update-' + ${reply.id}"
@@ -472,6 +477,7 @@
             .catch(error => {
                 console.error('Error:', error);
                 alert('댓글 좋아요 기능 수행 중 오류 발생: ' + error.message);
+                window.location.href = '/members/login';  // 로그인 페이지로 이동
             });
     }
 
@@ -502,6 +508,7 @@
             .catch(error => {
                 console.error('Error:', error);
                 alert('게시글 좋아요 기능 수행 중 오류 발생: ' + error.message);
+                window.location.href = '/members/login';  // 로그인 페이지로 이동
             });
     }
 </script>

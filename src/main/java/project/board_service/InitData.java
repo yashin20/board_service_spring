@@ -73,9 +73,9 @@ public class InitData {
 
             /*게시글 생성*/
             for (int i = 1; i <= 51; i++) {
-                createPost("title" + i , "content" + i, member1);
-                createPost("Post Title" + i , "content" + i + i, member2);
-                createPost(i + "게시글 입니다.", "게시글 내용입니다." + i, member3);
+                createPost("Hello, World" + i , "Hello! This is Content!" + i, member1);
+                createPost("안녕하세요!" + i , "안녕하세요 반갑습니다!" + i, member2);
+                createPost("게시글 입니다." + i, "게시글 내용입니다." + i, member3);
             }
             Post post1 = createPost("게시글 제목 입니다.",
                     lyric,
@@ -87,8 +87,12 @@ public class InitData {
             for (int i = 1; i <= 30; i++) {
                 createComment("comment" + i, post1, member1);
 
-                if (i % 5 == 0) {
-                    createReply(comment, "대댓글 입니다.", post1, member1);
+                if (i % 3 == 0) {
+                    createReply(comment, "member1 : 대댓글 입니다.", post1, member1);
+                } else if (i % 5 == 0) {
+                    createReply(comment, "member2 : 대댓글 입니다.", post1, member2);
+                } else if (i % 7 == 0) {
+                    createReply(comment, "member3 : 대댓글 입니다.", post1, member3);
                 }
             }
 

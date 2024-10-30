@@ -48,6 +48,7 @@ public class CommentDto {
         private Long postId;
         //작성자 - member
         private Long memberId;
+        private String username;
         private String nickname;
 
         private String createdAt;
@@ -68,6 +69,7 @@ public class CommentDto {
             this.postId = comment.getPost().getId();
 
             this.memberId = comment.getMember().getId();
+            this.username = comment.getMember().getUsername();
             this.nickname = comment.getMember().getNickname();
 
             this.createdAt = comment.getCreatedAt();
