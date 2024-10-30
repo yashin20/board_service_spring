@@ -77,7 +77,7 @@ public class InitData {
                 createPost("안녕하세요!" + i , "안녕하세요 반갑습니다!" + i, member2);
                 createPost("게시글 입니다." + i, "게시글 내용입니다." + i, member3);
             }
-            Post post1 = createPost("게시글 제목 입니다.",
+            Post post1 = createPost("REALLY REALLY - WINNER 中",
                     lyric,
                     member1);
 
