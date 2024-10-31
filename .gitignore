@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### OAUTH 설정 파일 (KEY) ###
+application-oauth.yml

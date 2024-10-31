@@ -12,5 +12,5 @@ public enum MemberRole {
     SUPER_ADMIN,
     ADMIN,
     USER,
-    SOCIAL
+    SOCIAL //OAuth
 }

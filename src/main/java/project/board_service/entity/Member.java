@@ -2,6 +2,7 @@ package project.board_service.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.board_service.dto.MemberDto;
@@ -13,6 +14,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Member extends BaseEntity {
 
     @Id @GeneratedValue
@@ -32,6 +34,13 @@ public class Member extends BaseEntity {
     //작성 게시글 리스트
     @OneToMany(mappedBy = "member")
     private List<Post> posts = new ArrayList<>();
+
+    /*소셜 로그인시 이미 등록됭 회원의 수정날짜만 업데이트 하기 위함*/
+    public Member updateUpdateAt() {
+        this.onPrePersist();
+        return this;
+    }
+
 
     public Member(Long id, String username, String password, String nickname, String email, String phone, MemberRole role) {
         this.id = id;
