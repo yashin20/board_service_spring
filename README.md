@@ -1,6 +1,5 @@
 # Board Service [Spring Boot Project]
----
-![메인화면](https://github.com/user-attachments/assets/44359a3c-ffd5-4b1b-af23-e90da22ce39c)
+![메인화면](https://github.com/user-attachments/assets/1a502db6-2167-47cd-94ee-f8cfabb044fa)
 ---
 ## 목차
  - [1. 프로젝트 소개](#1-프로젝트-소개)
