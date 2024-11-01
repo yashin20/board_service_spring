@@ -86,23 +86,23 @@
   <details>
     <summary>회원 (Member)</summary>
 
-   **1. 로그인 화면 - ("/members/login")**
-   ![image](https://github.com/user-attachments/assets/f8f20f6d-d922-42a6-8f64-7d9cc976f1e9)
+   **1. 로그인 화면 - ("/members/login")**  
+   ![image](https://github.com/user-attachments/assets/f8f20f6d-d922-42a6-8f64-7d9cc976f1e9)  
 
-   [소셜 로그인 - Google]
-   ![image](https://github.com/user-attachments/assets/842da38c-2ecf-4413-a65b-1d42a196a9a5)
-   ![image](https://github.com/user-attachments/assets/8f8ce3ea-602e-46d7-99bf-000d0de689ab)
-   Google 로그인 화면으로 이동한다.
+   [소셜 로그인 - Google]  
+   ![image](https://github.com/user-attachments/assets/842da38c-2ecf-4413-a65b-1d42a196a9a5)  
+   ![image](https://github.com/user-attachments/assets/8f8ce3ea-602e-46d7-99bf-000d0de689ab)  
+   Google 로그인 화면으로 이동한다.  
 
-   [소셜 로그인 - Naver]
-   ![image](https://github.com/user-attachments/assets/670edb23-4afe-45e1-bd15-ffa3cdef0870)
-   ![image](https://github.com/user-attachments/assets/37a051fc-53e4-4755-b472-3580ffd68daf)
-   Naver 로그인 화면으로 이동한다.
+   [소셜 로그인 - Naver]  
+   ![image](https://github.com/user-attachments/assets/670edb23-4afe-45e1-bd15-ffa3cdef0870)  
+   ![image](https://github.com/user-attachments/assets/37a051fc-53e4-4755-b472-3580ffd68daf)  
+   Naver 로그인 화면으로 이동한다.  
 
-   [소셜 로그인 - Kakao]
-   ![image](https://github.com/user-attachments/assets/c7f5bb47-b502-4e4f-ac7e-c3c8b2b442ab)
-   ![image](https://github.com/user-attachments/assets/91307a71-1c8f-4e57-a116-6b19b4629143)
-   Kakao 로그인 화면으로 이동한다.
+   [소셜 로그인 - Kakao]  
+   ![image](https://github.com/user-attachments/assets/c7f5bb47-b502-4e4f-ac7e-c3c8b2b442ab)  
+   ![image](https://github.com/user-attachments/assets/91307a71-1c8f-4e57-a116-6b19b4629143)  
+   Kakao 로그인 화면으로 이동한다.  
 
 
    **2. 회원가입 화면 - ("/members/join")**
@@ -111,7 +111,7 @@
    **3. 회원정보 화면 - ("/members/info)**
 
 
-   **4. 회원정보 수정 화면**
+   **4-1. 회원정보 수정 화면 - ("/members/info/update")**
 
    ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/49fd5a13-5ff2-4ee5-96b1-8fef64824af3)  
    로그인 된 username 을 입력하여, 회원정보 화면으로 이동  
@@ -124,9 +124,10 @@
    ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/8e879869-e2e9-4503-8ff2-80213486f736)  
    변경하려는 비밀번호에 대한 유효성 체크    
 
+   **4-2. 비밀번호 수정 화면 - ("/members/info/updatePassword")**
 
 
-   **4. 회원 탈퇴**
+   **5. 회원 탈퇴**
    ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/86e4f872-27d0-4d94-a470-5e5ad86565dd)  
    ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/109b6351-9b3c-4f57-a1eb-26bc5373da76)  
    ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/e0a6d5a1-82f8-41b2-bbde-ae1eeaeb9f09)  
