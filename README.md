@@ -111,7 +111,21 @@
 
 
    **2. 회원가입 화면 - ("/members/join")**
+   ![image](https://github.com/user-attachments/assets/ffdddc0d-6cd2-4904-ae8b-d723986b363f)  
 
+   ※ 회원가입 입력값에 대한 유효성 검사  
+   ![image](https://github.com/user-attachments/assets/881711b1-ba8b-4fda-be5e-08babc761dc9)  
+
+   Example) 새로운 회원가입  
+   ※ 'username' 중복 검사 - 같은 'username' 을 가지고 있는 기존 회원 존재  
+   ![image](https://github.com/user-attachments/assets/e3613693-e6bd-467e-a412-77466d0ffee7)  
+
+   ※ 정상적으로 회원가입 완료!  
+   ![image](https://github.com/user-attachments/assets/747c4549-6075-428a-8323-9521a085f712)
+   ![image](https://github.com/user-attachments/assets/dd7c7c19-2c38-46ac-b36a-bf78e467b195)  
+   DB 에 저장된 모습
+
+   
 
    **3. 회원정보 화면 - ("/members/info)**
 
