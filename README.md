@@ -141,7 +141,7 @@
 
   
   <details>
-    <summary>게시글</summary>
+    <summary>게시글 (Post)</summary>
     
    **1. 게시글 전체 목록**
 
@@ -247,7 +247,7 @@
   </details>
 
   <details>
-    <summary>댓글</summary>
+    <summary>댓글 (Comment)</summary>
 
   **1. 댓글 작성 화면**
   
