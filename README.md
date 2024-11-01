@@ -1,5 +1,7 @@
 # Board Service [Spring Boot Project]
+
 ![메인화면](https://github.com/user-attachments/assets/1a502db6-2167-47cd-94ee-f8cfabb044fa)
+
 ---
 ## 목차
  - [1. 프로젝트 소개](#1-프로젝트-소개)
@@ -313,6 +315,9 @@
 
 ### 1. 프로젝트 보완사항
 
+- 기능 추가
+  1. 게시글에 이미지/동영상 파일 추가 기능
+  2. 단일 게시판이 아닌 여러개의 게시판 수용 기능
 
 ### 2. 프로젝트 과정에서 발생한 문제
 - <a href="https://notorious.tistory.com/339" target="_blank">Spring Security 가 비로그인 상태에서 static rescoure 접근을 제한</a>
