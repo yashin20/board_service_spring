@@ -123,35 +123,56 @@
    ※ 정상적으로 회원가입 완료!  
    ![image](https://github.com/user-attachments/assets/747c4549-6075-428a-8323-9521a085f712)
    ![image](https://github.com/user-attachments/assets/dd7c7c19-2c38-46ac-b36a-bf78e467b195)  
-   DB 에 저장된 모습
+   DB 에 저장된 모습  
 
    
 
    **3. 회원정보 화면 - ("/members/info)**
+   ![image](https://github.com/user-attachments/assets/82930cf6-7614-4a94-a1bb-fffd31db2443)  
+   ![image](https://github.com/user-attachments/assets/22780dff-1d65-4439-bae2-3c93226aa30b)  
+   '정보 수정' 버튼을 눌러 '회원정보 수정 화면'으로 이동한다.  
 
 
-   **4-1. 회원정보 수정 화면 - ("/members/info/update")**
 
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/49fd5a13-5ff2-4ee5-96b1-8fef64824af3)  
-   로그인 된 username 을 입력하여, 회원정보 화면으로 이동  
+   **4-1. 회원정보 수정 화면 - ("/members/info/update")**  
+   ![image](https://github.com/user-attachments/assets/0839d853-8c80-422d-b8a5-0b2b39d511f9)  
 
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/1ffe8588-1a0d-4b49-8bb8-15a53608835e)  
+   이메일 형식 유효성 검사
+   ![image](https://github.com/user-attachments/assets/2cbc2a55-878f-4995-bb05-791c2687d408)  
 
-  
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/db057e23-35ee-4f4b-afcb-333b7dcc2956)  
-   변경하려는 닉네임에 대한 중복 체크    
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/8e879869-e2e9-4503-8ff2-80213486f736)  
-   변경하려는 비밀번호에 대한 유효성 체크    
+   ![image](https://github.com/user-attachments/assets/6bdaffcb-d2d9-4525-a24a-551ccf820b10)
+   nickname : 'newNickname' -> 'otherNickname'
+   email : 'newMember@example.com' -> 'otherMember@example.com'
+   이와 같이 수정 후 'Submit' 버튼을 눌러 정보 수정을 완료한다.  
+   
+   ![image](https://github.com/user-attachments/assets/0ec162cc-810a-4cfa-a541-b5e88956a969)  
+   수정사항이 적용된 것을 확인할 수 있다.  
 
-   **4-2. 비밀번호 수정 화면 - ("/members/info/updatePassword")**
+   
+
+   **4-2. 비밀번호 수정 화면 - ("/members/info/updatePassword")**  
+   ![image](https://github.com/user-attachments/assets/b90e57bd-2f44-4070-9258-adb01d771242)  
+
+   현재 비밀번호는 '1q2w3e4r~!' 이다.  
+   비밀번호를 변경하기 위해서는 
+   '현재 비밀번호'  
+   '변경하고자 하는 비밇번호'  
+   '변경하고자 하는 비밀번호 확인'  
+   이렇게 3개의 입력 필드를 갖는다.  
+
+   1) '현재 비밀번호'를 잘못입력하는 경우
+   ![image](https://github.com/user-attachments/assets/2937aabd-9e80-4caa-9fca-d836e7c731f2)  
+
+   2) '변경하고자 하는 비밀번호' 와 '변경하고자 하는 비밀번호 확인'이 서로 다른 경우
+   ![image](https://github.com/user-attachments/assets/82e00a95-d149-40b6-bf30-c820a1b48daa)
 
 
-   **5. 회원 탈퇴**
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/86e4f872-27d0-4d94-a470-5e5ad86565dd)  
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/109b6351-9b3c-4f57-a1eb-26bc5373da76)  
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/e0a6d5a1-82f8-41b2-bbde-ae1eeaeb9f09)  
-   회원 탈퇴 처리 후, 메인 페이지로 리다이렉션, 로그아웃 처리가 된다.    
-   또한, 탈퇴한 회원이 작성한 게시글 / 댓글의 작성자는 'unknown' 으로 표기된다.  
+   ![image](https://github.com/user-attachments/assets/2acba68e-c28b-440c-bc1a-ba9deb0bd249)  
+   password : '1q2w3e4r~!' -> '11dnjfekf~!'로 수정하였다.
+
+
+
+   **5. 회원 탈퇴**  
 
     
   </details>
