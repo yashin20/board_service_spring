@@ -9,7 +9,7 @@
    - [1-2. 개발 기간](#1-2-개발-기간)
    - [1-3. 프로젝트 기능](#1-3-프로젝트-기능)
    - [1-4. 개발 환경](#1-4-개발-환경)
-   - [1-5. 실행 화면](#1-5-실행-환경)
+   - [1-5. 실행 화면](#1-5-실행-화면)
   
  - [2. 프로젝트 구조](#2-프로젝트-구조)
    - [2-1. 패키지 구조](#2-1-패키지-구조)
@@ -93,6 +93,14 @@
 
    **1. 로그인 화면 - ("/members/login")**  
    ![image](https://github.com/user-attachments/assets/f8f20f6d-d922-42a6-8f64-7d9cc976f1e9)  
+  
+   [로그인 여부에 따른 헤더 버튼 구성]
+   로그인 X  
+   ![image](https://github.com/user-attachments/assets/b56e72a4-0d1c-48a2-9951-d630386ad558)  
+  
+   로그인 O
+   ![image](https://github.com/user-attachments/assets/3c0fb534-b1c3-4d56-9c4f-466f0120c9bb)  
+
 
    [소셜 로그인 - Google]  
    ![image](https://github.com/user-attachments/assets/842da38c-2ecf-4413-a65b-1d42a196a9a5)  
@@ -110,7 +118,7 @@
    Kakao 로그인 화면으로 이동한다.  
 
 
-   **2. 회원가입 화면 - ("/members/join")**
+   **2. 회원가입 화면 - ("/members/join")**  
    ![image](https://github.com/user-attachments/assets/ffdddc0d-6cd2-4904-ae8b-d723986b363f)  
 
    ※ 회원가입 입력값에 대한 유효성 검사  
@@ -121,13 +129,13 @@
    ![image](https://github.com/user-attachments/assets/e3613693-e6bd-467e-a412-77466d0ffee7)  
 
    ※ 정상적으로 회원가입 완료!  
-   ![image](https://github.com/user-attachments/assets/747c4549-6075-428a-8323-9521a085f712)
+   ![image](https://github.com/user-attachments/assets/747c4549-6075-428a-8323-9521a085f712)  
    ![image](https://github.com/user-attachments/assets/dd7c7c19-2c38-46ac-b36a-bf78e467b195)  
    DB 에 저장된 모습  
 
    
 
-   **3. 회원정보 화면 - ("/members/info)**
+   **3. 회원정보 화면 - ("/members/info)**  
    ![image](https://github.com/user-attachments/assets/82930cf6-7614-4a94-a1bb-fffd31db2443)  
    ![image](https://github.com/user-attachments/assets/22780dff-1d65-4439-bae2-3c93226aa30b)  
    '정보 수정' 버튼을 눌러 '회원정보 수정 화면'으로 이동한다.  
@@ -137,12 +145,12 @@
    **4-1. 회원정보 수정 화면 - ("/members/info/update")**  
    ![image](https://github.com/user-attachments/assets/0839d853-8c80-422d-b8a5-0b2b39d511f9)  
 
-   이메일 형식 유효성 검사
-   ![image](https://github.com/user-attachments/assets/2cbc2a55-878f-4995-bb05-791c2687d408)  
-
-   ![image](https://github.com/user-attachments/assets/6bdaffcb-d2d9-4525-a24a-551ccf820b10)
-   nickname : 'newNickname' -> 'otherNickname'
-   email : 'newMember@example.com' -> 'otherMember@example.com'
+   이메일 형식 유효성 검사  
+   ![image](https://github.com/user-attachments/assets/2cbc2a55-878f-4995-bb05-791c2687d408)    
+  
+   ![image](https://github.com/user-attachments/assets/6bdaffcb-d2d9-4525-a24a-551ccf820b10)  
+   nickname : 'newNickname' -> 'otherNickname'  
+   email : 'newMember@example.com' -> 'otherMember@example.com'  
    이와 같이 수정 후 'Submit' 버튼을 눌러 정보 수정을 완료한다.  
    
    ![image](https://github.com/user-attachments/assets/0ec162cc-810a-4cfa-a541-b5e88956a969)  
@@ -160,15 +168,15 @@
    '변경하고자 하는 비밀번호 확인'  
    이렇게 3개의 입력 필드를 갖는다.  
 
-   1) '현재 비밀번호'를 잘못입력하는 경우
+   1) '현재 비밀번호'를 잘못입력하는 경우  
    ![image](https://github.com/user-attachments/assets/2937aabd-9e80-4caa-9fca-d836e7c731f2)  
 
-   2) '변경하고자 하는 비밀번호' 와 '변경하고자 하는 비밀번호 확인'이 서로 다른 경우
-   ![image](https://github.com/user-attachments/assets/82e00a95-d149-40b6-bf30-c820a1b48daa)
+   2) '변경하고자 하는 비밀번호' 와 '변경하고자 하는 비밀번호 확인'이 서로 다른 경우  
+   ![image](https://github.com/user-attachments/assets/82e00a95-d149-40b6-bf30-c820a1b48daa)  
 
 
    ![image](https://github.com/user-attachments/assets/2acba68e-c28b-440c-bc1a-ba9deb0bd249)  
-   password : '1q2w3e4r~!' -> '11dnjfekf~!'로 수정하였다.
+   password : '1q2w3e4r~!' -> '11dnjfekf~!'로 수정하였다.  
 
 
 
@@ -184,12 +192,8 @@
     <summary>게시글 (Post)</summary>
     
    **1. 게시글 전체 목록**
+   ![image](https://github.com/user-attachments/assets/eb2ffe3c-c87e-4f3b-a1d3-5fe837a87c64)  
 
-   로그인 X 화면  
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/5547af49-7724-4aeb-979f-7a6ad2590bdd)  
-
-   로그인 O 화면  
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/0871872a-720b-445f-bfe3-2055b252bd2e)  
 
 
 
