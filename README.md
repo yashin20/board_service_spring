@@ -1,4 +1,4 @@
-# Board Service [Spring Boot Project]
+![image](https://github.com/user-attachments/assets/ef34209d-9179-4897-9324-369ea8b454ba)# Board Service [Spring Boot Project]
 
 ![메인화면](https://github.com/user-attachments/assets/1a502db6-2167-47cd-94ee-f8cfabb044fa)
 
@@ -291,20 +291,60 @@
   ['Hello' 키워드로 검색 내용 && 조회수 기준 내림차순 정렬 中 사용자 기준 1페이지]  
   ![image](https://github.com/user-attachments/assets/33e0dcc2-40dc-4c52-952a-8137d446786a)  
 
+
+  **7. 게시글 돟아요 기능**  
+  ![image](https://github.com/user-attachments/assets/e5fa3a6a-d261-4965-a5f5-322238e1a3d2)  
+  현재 로그인된 회원이 좋아요를 누른 게시글은 '좋아요'버튼이 색칠된 것을 확인할 수 있다.   
+
+  
     
   </details>
 
   <details>
     <summary>댓글 (Comment)</summary>
 
-  **1. 댓글 작성 화면**
+
+  **1. 댓글 작성 화면**  
+  ![image](https://github.com/user-attachments/assets/1fdb6be1-4554-4ffb-92e7-ac847bedb1b4)  
+  게시글 하단에 해당 게시글 소속의 댓글을 작성할 수 있다.  
+  ![image](https://github.com/user-attachments/assets/ad619178-c9bf-4cd9-a02b-44fe85a8dcd1)  
+
+
+  **2. 댓글 수정**  
+  ![image](https://github.com/user-attachments/assets/a667385a-5cc2-4265-9587-93b7e4461b3f)  
+  현재 로그인 회원 : "member3" (nickname : 'nic_member3')  
   
+  ![image](https://github.com/user-attachments/assets/7f14c63d-1735-436f-b53a-e6f854810fda)  
+  현재 로그인 회원이 작성한 댓글/대댓글만 '수정', '삭제' 버튼이 확인된다.  
 
-  **2. 댓글 수정**
+  ![image](https://github.com/user-attachments/assets/9ce9e132-057d-48b3-aeb8-19cc7c23598b)  
+  '수정' 버튼을 눌러 수정 모드로 변환한다.  
+
+  ![image](https://github.com/user-attachments/assets/a3453711-b601-42d0-8338-de43efa2342b)  
+  댓글내용을 수정한다. '게시' 버튼을 눌러 수정을 완료한다.  
+
+  [수정된 댓글]  
+  ![image](https://github.com/user-attachments/assets/e4fe1357-9b2a-4dbe-997e-9ef82570309e)  
+  댓글이 수정된 것을 확인할 수 있다.  
+  수정된 댓글은 '작성일자' 뒤에 "(수정됨)" 문구가 붙은 것을 확인할 수 있다.  
+
+
+  **3. 댓글 좋아요**  
+  ![image](https://github.com/user-attachments/assets/295a1511-c7ec-40fa-8430-b58b45c60822)  
+  현재 로그인된 회원이 좋아요를 누른 댓글은 '좋아요'버튼이 색칠된 것을 확인할 수 있다.   
+
+  ![image](https://github.com/user-attachments/assets/a991a653-ff7e-4c2a-acf6-467a69bb055c)  
+  이미 좋아요가 눌러진 댓글의 '좋아요'버튼을 다시 누른다면, 좋아요가 취소되고, 버튼이 원상태로 복귀된다.  
 
 
 
-  **3. 댓글 삭제**
+  **4. 댓글 삭제**  
+
+  ![image](https://github.com/user-attachments/assets/dc27f438-ebfe-4183-a3f6-fe152ddffb4e)  
+  '삭제' 버튼을 눌러 댓글/대댓글 삭제를 진행한다.    
+
+  ![image](https://github.com/user-attachments/assets/10d16db1-dea0-4af7-9dcc-5a951b1763ca)  
+  해당 댓글이 삭제된 것을 확인할 수 있다.  
 
     
   </details>
