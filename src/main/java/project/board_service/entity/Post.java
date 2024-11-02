@@ -30,7 +30,7 @@ public class Post extends BaseEntity {
     private Member member;
 
     //소속 댓글 리스트
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
 
     public Post(Long id, String title, String content, Member member) {

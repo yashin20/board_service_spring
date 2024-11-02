@@ -3,82 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>Join Page</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
+<!--header-->
+<header class="header" th:replace="~{fragments/header :: header}"></header>
 
-<h2>회원가입</h2>
+<div class="container mt-5">
+    <!-- 회원 정보 카드 -->
+    <div class="card shadow-sm" style="max-width: 600px; margin: auto;">
+        <div class="card-body">
 
-<form th:action="@{/members/join}" th:object="${joinForm}" method="post">
+            <h2 class="text-center mb-4">회원가입</h2>
 
-    <div>
-        <input id="join-username" th:field="*{username}" type="text" placeholder="username" required="">
-        <label for="join-username">Username</label>
+            <form th:action="@{/members/join}" th:object="${joinForm}" method="post">
 
-        <!-- Error message -->
-        <div th:if="${usernameError}">
-            <p th:text="${usernameError}">Error message here</p>
+                <div class="mb-3">
+                    <label for="join-username" class="form-label">Username</label>
+                    <input id="join-username" th:field="*{username}" type="text" placeholder="username" class="form-control" required>
+
+                    <!-- Error message -->
+                    <div th:if="${usernameError}" class="text-danger mb-3">
+                        <p th:text="${usernameError}">Error message here</p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="join-newPassword" class="form-label">Password</label>
+                    <input id="join-newPassword" th:field="*{newPassword}" type="password" placeholder="password"
+                           class="form-control" required>
+
+                    <!-- Error message -->
+                    <div th:if="${newPasswordError}" class="text-danger mb-3">
+                        <p th:text="${newPasswordError}">Error message here</p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="join-newPassword2" class="form-label">Password Check</label>
+                    <input id="join-newPassword2" th:field="*{newPassword2}" type="password"
+                           placeholder="password check" class="form-control" required>
+
+                    <!-- Error message -->
+                    <div th:if="${newPassword2Error}" class="text-danger mb-3">
+                        <p th:text="${newPassword2Error}">Error message here</p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="join-nickname" class="form-label">Nickname</label>
+                    <input id="join-nickname" th:field="*{nickname}" type="text" placeholder="nickname"
+                           class="form-control" required>
+
+                    <!-- Error message -->
+                    <div th:if="${nicknameError}" class="text-danger mb-3">
+                        <p th:text="${nicknameError}">Error message here</p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="join-email" class="form-label">E-Mail</label>
+                    <input id="join-email" th:field="*{email}" type="email" placeholder="E-Mail"
+                           class="form-control" required>
+
+                    <!-- Error message -->
+                    <div th:if="${emailError}" class="text-danger mb-3">
+                        <p th:text="${emailError}">Error message here</p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="join-phone" class="form-label">Phone</label>
+                    <input id="join-phone" th:field="*{phone}" type="text" placeholder="Phone"
+                           class="form-control" required>
+
+                    <!-- Error message -->
+                    <div th:if="${phoneError}" class="text-danger mb-3">
+                        <p th:text="${phoneError}">Error message here</p>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <!-- Error message -->
+                <div th:if="${errorMessage}" class="text-danger mb-3">
+                    <p th:text="${errorMessage}">Error message here</p>
+                </div>
+
+            </form>
+
         </div>
     </div>
+</div>
 
-    <div>
-        <input id="join-newPassword" th:field="*{newPassword}" type="password" placeholder="password" required="">
-        <label for="join-newPassword">Password</label>
-
-        <!-- Error message -->
-        <div th:if="${newPasswordError}">
-            <p th:text="${newPasswordError}">Error message here</p>
-        </div>
-    </div>
-
-    <div>
-        <input id="join-newPassword2" th:field="*{newPassword2}" type="password" placeholder="password check" required="">
-        <label for="join-newPassword2">Password Check</label>
-
-        <!-- Error message -->
-        <div th:if="${newPassword2Error}">
-            <p th:text="${newPassword2Error}">Error message here</p>
-        </div>
-    </div>
-
-    <div>
-        <input id="join-nickname" th:field="*{nickname}" type="text" placeholder="nickname" required="">
-        <label for="join-nickname">Nickname</label>
-
-        <!-- Error message -->
-        <div th:if="${nicknameError}">
-            <p th:text="${nicknameError}">Error message here</p>
-        </div>
-    </div>
-
-    <div>
-        <input id="join-email" th:field="*{email}" type="email" placeholder="E-Mail" required="">
-        <label for="join-email">E-Mail</label>
-
-        <!-- Error message -->
-        <div th:if="${emailError}">
-            <p th:text="${emailError}">Error message here</p>
-        </div>
-    </div>
-
-    <div>
-        <input id="join-phone" th:field="*{phone}" type="text" placeholder="Phone" required="">
-        <label for="join-phone">Phone</label>
-
-        <!-- Error message -->
-        <div th:if="${phoneError}">
-            <p th:text="${phoneError}">Error message here</p>
-        </div>
-    </div>
-
-    <button type="submit">Submit</button>
-
-    <!-- Error message -->
-    <div th:if="${errorMessage}">
-        <p th:text="${errorMessage}">Error message here</p>
-    </div>
-
-</form>
-
-
+<!--footer-->
+<footer class="footer" th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

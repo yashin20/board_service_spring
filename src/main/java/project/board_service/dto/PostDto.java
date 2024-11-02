@@ -52,6 +52,7 @@ public class PostDto {
         private Integer likes;
         //member - 작성자
         private String nickname;
+        private String username;
         private Long memberId;
 
         private String createdAt;
@@ -68,6 +69,7 @@ public class PostDto {
             this.views = post.getViews();
             this.likes = post.getLikes();
             this.nickname = post.getMember().getNickname();
+            this.username = post.getMember().getUsername();
             this.memberId = post.getMember().getId();
             this.createdAt = post.getCreatedAt();
             this.updatedAt = post.getUpdatedAt();
