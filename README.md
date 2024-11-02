@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/ef34209d-9179-4897-9324-369ea8b454ba)# Board Service [Spring Boot Project]
+# Board Service [Spring Boot Project]
 
 ![메인화면](https://github.com/user-attachments/assets/1a502db6-2167-47cd-94ee-f8cfabb044fa)
 
