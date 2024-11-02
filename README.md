@@ -216,87 +216,81 @@
 
 
 
-   **2. 게시글 등록 화면**  
-
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/67099714-c576-4029-8b68-552aa2a8ef5e)  
-
-   로그인한 사용자만 게시글 작성이 가능하며, 작성 후 '게시' 버튼을 누르면 메인 페이지로 리다이렉트 된다.  
-
+   **2. 게시글 등록 화면 - ("/posts/new")**  
+   ![image](https://github.com/user-attachments/assets/bad9dc45-6c45-4c0e-ae0e-0f4214adf0f7)  
    
+   로그인한 사용자만 게시글 작성이 가능하며, 작성 후 '작성하기' 버튼을 누르면 메인 페이지로 리다이렉트 된다.  
 
-   **3. 게시글 상세 정보**
+   ![image](https://github.com/user-attachments/assets/119453d7-eaab-4ff0-9b49-ee82904b74f8)
+   ※로그인 하지 않은 상태에서 '글작성' 버튼을 누르게되면, 로그인 화면("/members/login")으로 이동한다.  
 
-   로그인 X  
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/92b77621-66c2-4a46-83e7-e13552424ae3)  
+     
 
-   ※ 로그인 하지 않은 경우, 게시글 상세 정보에 접근 가능하지만, '게시글 설정' 옵션에 접근할 수 없다.  
+   **3. 게시글 상세 정보 - ("/posts/{postId}")**  
+
+   1) 로그인 X  
+   ![image](https://github.com/user-attachments/assets/3dbf3788-e454-446e-aac2-a9d60ad6cc67)  
+
+   2) 게시글 작성자로 로그인 한 경우  
+   ![image](https://github.com/user-attachments/assets/ba85c4da-15fa-451a-9ed7-528622407c56)  
+   게시글 작성자인 "member1" 으로 로그인 한 경우,  
+   '게시글 수정', '게시글 삭제' 버튼이 보이는 것을 확인할 수 있다.  
+  
+   4) 게시글 작성자가 아닌 회원으로 로그인 한 경우  
+   ![image](https://github.com/user-attachments/assets/0f9c36d3-68a4-427e-8665-17e44a1b6392)  
+   게시글 작성자 "member1" 과 다른 회원인 "member2"로 로그인 한 경우,  
+   '게시글 수정', '게시글 삭제' 버튼을 확인할 수 없다.  
 
 
-   작성자 계정이 아닌 다른 계정으로 로그인 O  
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/bef81a23-7918-4817-a5b6-b0dc5515f885)  
-
-   ※ 작성자 계정이 아닌 다른 계정으로 로그인한 경우, '게시글 설정' 옵션에 접근 가능하지만, '게시글 작성' 기능만 접근 가능하다.  
 
 
-   작성자 계정으로 로그인 O  
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/15f21e93-5271-447d-b708-f7aa6e0feff0)  
+   **4. 게시글 수정 화면 - ("/posts/update/{postId}")**
+   ![image](https://github.com/user-attachments/assets/c1ef377d-fba7-4e13-a7de-3c87c7337951)  
 
-   ※ 작성자 계정으로 로그인 한 경우, '게시글 수정' 과 '게시글 삭제' 를 할 수 있다.  
-
-
-
-   **4. 게시글 수정 화면**
-
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/2ecc1243-4c45-4f2f-9b42-4af5f6e7e914)  
-
-   게시글 수정 후, '게시' 버튼을 눌러 수정을 마무리한다.    
-   '게시' 버튼을 누르면 게시글 목록으로 이동한다.  
+   기존 게시글 내용이 'textarea'에 입력되어 있는 것을 볼 수 있다.  
+   게시글 수정 후, '저장하기' 버튼을 눌러 수정을 마무리한다.  
+   '저장하' 버튼을 누르면 게시글 목록으로 이동한다.  
 
    [수정된 게시글 화면]  
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/c828dff6-270e-4b36-a597-85969a196c0c)  
+   ![image](https://github.com/user-attachments/assets/456dcff8-aa14-4973-adc5-0321a64ce4cf)  
+
    
-   
 
-   **5. 게시글 삭제 화면**
+   **5. 게시글 삭제 화면**  
+   ![image](https://github.com/user-attachments/assets/cf2c8c41-5bc3-481a-86c5-c52f93fdaeca)  
+   '게시글 삭제' 버튼을 눌러 게시글 삭제를 진행한다. 
 
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/816ef173-4759-4456-b8b5-1ad39da2f7bb)  
+   [기존 게시글 목록]  
+   ![image](https://github.com/user-attachments/assets/3674cc31-e14b-47b4-9a90-4eae363b5773)  
 
-   '게시글 삭제' 버튼을 눌러 삭제를 진행한다.  
+   [삭제 후 게시글 목록]  
+   ![image](https://github.com/user-attachments/assets/aa859a43-ff95-4d25-9339-ae432b0db8fe)  
+   '154'번 게시글	"REALLY REALLY - WINNER 中"이 삭제된 것을 확인할 수 있다.  
+  
 
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/08081d6f-d02c-4c06-9a42-d1c9d963d53d)  
-
-   '게시글 번호'를 포함한 삭제 완료 안내 메시지가 등장한다.
-
-   [게시글 목록]  
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/440f7a24-f7f1-4178-b6da-94319eda0f34)  
-
-   게시글이 삭제 된 것을 볼 수 있다.
-
-
-   **6. 게시글 검색 화면**
-
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/6b0fdefb-da6a-4dc7-9220-14c441fbb801)  
-
+   **6. 게시글 검색 화면**  
+   "Hello"란 키워드를 포함한 게시글을 검색한다.  
+   ![image](https://github.com/user-attachments/assets/bb9828b1-03c9-4c44-bb04-2ee8a23be3f7)  
+   제목에 Hello가 포함된 게시글을 검색 결과로 산출한 것을 확인할 수 있다.  
 
 
   **6-1. 게시글 검색 후 페이징 화면**
 
-  ['by' 키워드로 검색한 화면]  
-  ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/bbd81c39-1be6-45da-a29c-a9431b2a07ca)  
-
-  ['by' 키워드로 검색 내용 中 사용자 기준 4페이지]  
-  ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/c56913a8-1e71-4927-a828-27cf637fc195)  
-
+  ['Hello' 키워드로 검색한 화면]  
+  ![image](https://github.com/user-attachments/assets/bb9828b1-03c9-4c44-bb04-2ee8a23be3f7)  
+  
+  ['Hello' 키워드로 검색 내용 中 사용자 기준 3페이지]  
+  ![image](https://github.com/user-attachments/assets/904c9477-5099-4bee-a9d3-0dc8b9b67b8c)  
 
 
   **6-2. 게시글 검색 후 페이징 + 정렬**
 
-  ['by' 키워드로 검색 내용 && 조회수 기준 내림차순 정렬]  
-  ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/79fef79f-8ff0-4c39-99ac-2677d557079b)  
+  ['Hello' 키워드로 검색 내용 && 조회수 기준 내림차순 정렬]  
+  ![image](https://github.com/user-attachments/assets/33e0dcc2-40dc-4c52-952a-8137d446786a)  
 
+  ['Hello' 키워드로 검색 내용 && 조회수 기준 내림차순 정렬 中 사용자 기준 1페이지]  
+  ![image](https://github.com/user-attachments/assets/33e0dcc2-40dc-4c52-952a-8137d446786a)  
 
-  ['by' 키워드로 검색 내용 && 조회수 기준 내림차순 정렬 中 사용자 기준 1페이지]  
-  ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/d346d15f-fe23-401e-a321-e79a19fa6537)   
     
   </details>
 
