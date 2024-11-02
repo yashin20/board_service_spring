@@ -191,22 +191,32 @@
   <details>
     <summary>게시글 (Post)</summary>
     
-   **1. 게시글 전체 목록**
+   **1. 게시글 전체 목록 - ("/")**
    ![image](https://github.com/user-attachments/assets/eb2ffe3c-c87e-4f3b-a1d3-5fe837a87c64)  
 
 
 
 
-   **1-1. 게시글 전체 목록 정렬**
+   **1-1. 게시글 전체 목록 정렬 - (Views, Likes, Created At)**
 
    '조회수' 기준으로 내림차순 정렬  
-   ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/18250746-ccbb-4911-bcf1-f39d151f0f83)  
+   ![image](https://github.com/user-attachments/assets/ba12d056-b2ca-449e-b84a-5b072e1897d6)  
 
+   'Views' 항목을 클릭하여 '조회수' 기준 내림차순 정렬을 한다.  
    ※ 로그인을 하지 않아도 게시글 정렬이 가능하다.  
 
 
+   '좋아요 수' 기준으로 내림차순 정렬  
+   ![image](https://github.com/user-attachments/assets/708404d2-d611-4a48-b62a-701ee634c793)  
 
-   **2. 게시글 등록 화면**
+   'Likes' 항목을 클릭하여 '좋아요 수' 기준 내림차순 정렬을 한다.  
+   ※ 로그인을 하지 않아도 게시글 정렬이 가능하다.  
+
+   +) 'createdAt' 항목을 클릭하여 '작성일자' 기준 내림차순 정렬을 한다.  
+
+
+
+   **2. 게시글 등록 화면**  
 
    ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/67099714-c576-4029-8b68-552aa2a8ef5e)  
 
