@@ -361,7 +361,91 @@
 <summary>패키지 구조 보기</summary>
 
 ```
-
+📦src
+ ┣ 📂main
+ ┃ ┣ 📂java
+ ┃ ┃ ┗ 📂project
+ ┃ ┃ ┃ ┗ 📂board_service
+ ┃ ┃ ┃ ┃ ┣ 📂config
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomUserDetailsService.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜WebSecurityConfig.java
+ ┃ ┃ ┃ ┃ ┣ 📂controller
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentApiController.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentController.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentLikesController.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜HomeController.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberController.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostController.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostLikesController.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜TestController.java
+ ┃ ┃ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentDto.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberDto.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜PostDto.java
+ ┃ ┃ ┃ ┃ ┣ 📂entity
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜BaseEntity.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜Comment.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentLikes.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜Member.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberRole.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜Post.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜PostLikes.java
+ ┃ ┃ ┃ ┃ ┣ 📂exception
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜DataAlreadyExistsException.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜DataNotFoundException.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜GlobalExceptionHandler.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜PasswordCheckFailedException.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜UnauthorizedAccessException.java
+ ┃ ┃ ┃ ┃ ┣ 📂oauth
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomOAuth2UserService.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜OAuthAttributes.java
+ ┃ ┃ ┃ ┃ ┣ 📂repository
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentLikesRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostLikesRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜PostRepository.java
+ ┃ ┃ ┃ ┃ ┣ 📂service
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentLikesService.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentService.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberService.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostLikesService.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜PostService.java
+ ┃ ┃ ┃ ┃ ┣ 📜BoardServiceApplication.java
+ ┃ ┃ ┃ ┃ ┗ 📜InitData.java
+ ┃ ┗ 📂resources
+ ┃ ┃ ┣ 📂static
+ ┃ ┃ ┃ ┣ 📂css
+ ┃ ┃ ┃ ┃ ┣ 📜bootstrap.min.css
+ ┃ ┃ ┃ ┃ ┗ 📜styles.css
+ ┃ ┃ ┃ ┣ 📂img
+ ┃ ┃ ┃ ┃ ┣ 📜google-logo.png
+ ┃ ┃ ┃ ┃ ┣ 📜kakao-logo.png
+ ┃ ┃ ┃ ┃ ┗ 📜naver-logo.png
+ ┃ ┃ ┃ ┗ 📂js
+ ┃ ┃ ┃ ┃ ┗ 📜scripts.js
+ ┃ ┃ ┣ 📂templates
+ ┃ ┃ ┃ ┣ 📂fragments
+ ┃ ┃ ┃ ┃ ┣ 📜footer.html
+ ┃ ┃ ┃ ┃ ┗ 📜header.html
+ ┃ ┃ ┃ ┣ 📂members
+ ┃ ┃ ┃ ┃ ┣ 📜info.html
+ ┃ ┃ ┃ ┃ ┣ 📜infoUpdate.html
+ ┃ ┃ ┃ ┃ ┣ 📜join.html
+ ┃ ┃ ┃ ┃ ┣ 📜login.html
+ ┃ ┃ ┃ ┃ ┗ 📜passwordUpdate.html
+ ┃ ┃ ┃ ┣ 📂posts
+ ┃ ┃ ┃ ┃ ┣ 📜create.html
+ ┃ ┃ ┃ ┃ ┣ 📜information.html
+ ┃ ┃ ┃ ┃ ┗ 📜update.html
+ ┃ ┃ ┃ ┗ 📜index.html
+ ┃ ┃ ┣ 📜application-oauth.yml
+ ┃ ┃ ┗ 📜application.yml
+ ┗ 📂test
+ ┃ ┗ 📂java
+ ┃ ┃ ┗ 📂project
+ ┃ ┃ ┃ ┗ 📂board_service
+ ┃ ┃ ┃ ┃ ┗ 📜BoardServiceApplicationTests.java
 ```
 
 
