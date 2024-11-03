@@ -458,15 +458,20 @@
 ![image](https://github.com/user-attachments/assets/c7d6d2d5-aae8-48d0-88c1-c3b01336b406)  
 
 **MEMBER TABLE**   
-![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/688dd71e-b194-41d7-8366-5634e666f748)  
-
+![image](https://github.com/user-attachments/assets/86b64260-8c85-4e3f-8be2-923eedd537bf)  
+  
 **POST TABLE**  
-![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/e56c4f17-526d-4c94-92b3-14cb63b0aee3)  
+![image](https://github.com/user-attachments/assets/ecd73066-81db-4de3-ad31-cf937db9b5d5)  
 
 **COMMENT TABLE**  
-![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/422d6e53-7c6c-4d22-bc08-fd9febfa44a6)  
+![image](https://github.com/user-attachments/assets/801938bf-9677-4a54-8701-bc94114e9735)  
+  
+**POST_LIKES TABLE**  
+![image](https://github.com/user-attachments/assets/7162804c-3de1-47aa-a36c-6bbf8b913a1a)  
 
-
+**COMMENT_LIKES TABLE**  
+![image](https://github.com/user-attachments/assets/52c7fdf2-c44e-4df0-b4ac-cab269ecb928)  
+  
 
 ### 2-3. API 설계
 
