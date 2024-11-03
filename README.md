@@ -453,9 +453,9 @@
 
 
 
-### 2-2. DB 설계
+### 2-2. DB 설계  
 
-![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/34bac54a-31d9-458a-83e3-33ca74f29413)
+![image](https://github.com/user-attachments/assets/c7d6d2d5-aae8-48d0-88c1-c3b01336b406)  
 
 **MEMBER TABLE**   
 ![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/688dd71e-b194-41d7-8366-5634e666f748)  
