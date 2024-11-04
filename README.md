@@ -479,12 +479,11 @@
 ![image](https://github.com/user-attachments/assets/fbadb79a-e320-4bdd-b6fe-acdaa5a70801)  
 
 **Post 관련 API**  
-![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/04184267-86fe-41fd-af99-a6772c85633a)  
+![image](https://github.com/user-attachments/assets/58bf4f2a-d3c0-4845-89c9-6f9190c002aa)  
   
 **Comment 관련 API**  
-![image](https://github.com/yashin20/BoardServiceV2/assets/92693776/bc8aa6de-89c6-4e65-97a5-374b5d8df839)  
+![image](https://github.com/user-attachments/assets/c37aa903-2bb7-44d0-8109-f5345a34f6ea)  
   
-
 
 
 ## 개발 내용
