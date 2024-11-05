@@ -490,6 +490,11 @@
 
 - <a href="https://notorious.tistory.com/393" target="_blank">#0. 프로젝트 생성 및 환경설정 (+Github 동기화)</a>
 - <a href="https://notorious.tistory.com/394" target="_blank">#1. 로그인 / 회원가입 구현</a>
+
+- <a href="https://notorious.tistory.com/347" target="_blank"># 소셜로그인 - Google</a>
+- <a href="https://notorious.tistory.com/349" target="_blank"># 소셜로그인 - Kakao</a>
+- <a href="https://notorious.tistory.com/348" target="_blank"># 소셜로그인 - Naver</a>
+
 - <a href="https://notorious.tistory.com/340" target="_blank">게시글 페이징 처리 구현</a>
 - <a href="https://notorious.tistory.com/341" target="_blank">게시글 키워드 검색 + 정렬 + 페이징 기능 구현</a>
 - <a href="https://notorious.tistory.com/342" target="_blank">회원 탈퇴시, 게시글 / 댓글 처리</a>
@@ -505,7 +510,9 @@
   2. 단일 게시판이 아닌 여러개의 게시판 수용 기능
 
 ### 2. 프로젝트 과정에서 발생한 문제
+
 - <a href="https://notorious.tistory.com/339" target="_blank">Spring Security 가 비로그인 상태에서 static rescoure 접근을 제한</a>
+- <a href="https://notorious.tistory.com/395" target="_blank">게시글 내용 줄바꿈 구현하기</a>
 
 
 ### 3. 후기
